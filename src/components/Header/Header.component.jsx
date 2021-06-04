@@ -1,8 +1,10 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styled from '@emotion/styled';
 
 import MenuButton from './MenuButton';
 import SearchBar from '../SearchBar';
+import Avatar from '../Common/Avatar';
+import ToggleSwitch from '../ToggleSwitch';
 
 const HeaderContainer = styled.header`
   width: 100%;
@@ -25,14 +27,34 @@ const HeaderContainer = styled.header`
   }
 `;
 
+const HeaderSection = styled.div`
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+`;
+
 const Header = () => {
+  const [isCheck, setCheck] = useState(false);
+
   return (
     <HeaderContainer>
-      <div>
-        <MenuButton />
+      <HeaderSection>
+        <MenuButton toggleMenu={() => {}} />
         <SearchBar />
-      </div>
-      <div>Another</div>
+      </HeaderSection>
+      <HeaderSection>
+        <div style={{ marginRight: '1rem' }}>
+          <ToggleSwitch
+            toggleName="theme-toggle-switch"
+            checked={isCheck}
+            onChange={() => setCheck(!isCheck)}
+          />
+        </div>
+        <Avatar
+          src="https://images.unsplash.com/photo-1491528323818-fdd1faba62cc?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
+          alt="avatar"
+        />
+      </HeaderSection>
     </HeaderContainer>
   );
 };
