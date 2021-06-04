@@ -1,39 +1,42 @@
-import React, { useRef } from 'react';
-import { Link, useHistory } from 'react-router-dom';
+import React, { useCallback, useEffect, useState } from 'react';
+import styled from '@emotion/styled';
 
-import { useAuth } from '../../providers/Auth';
-import './Home.styles.css';
+import { $getVideos } from '../../api/videos';
 
-function HomePage() {
-  const history = useHistory();
-  const sectionRef = useRef(null);
-  const { authenticated, logout } = useAuth();
+import GridVideo from '../../components/GridVideo';
+import Container from '../../components/Common/Container';
 
-  function deAuthenticate(event) {
-    event.preventDefault();
-    logout();
-    history.push('/');
-  }
+const HomePageContainer = styled(Container)`
+  margin: auto;
+`;
+
+const HomePage = () => {
+  const [state, setState] = useState({
+    isLoading: true,
+    videos: [],
+  });
+
+  const fetchVideos = useCallback(async () => {
+    try {
+      const res = await $getVideos();
+
+      if (res.items) {
+        setState((prev) => ({ ...prev, isLoading: false, videos: res.items }));
+      }
+    } catch (err) {
+      console.log(err);
+    }
+  }, []);
+
+  useEffect(() => {
+    fetchVideos();
+  }, [fetchVideos]);
 
   return (
-    <section className="homepage" ref={sectionRef}>
-      <h1>Hello stranger!</h1>
-      {authenticated ? (
-        <>
-          <h2>Good to have you back</h2>
-          <span>
-            <Link to="/" onClick={deAuthenticate}>
-              ← logout
-            </Link>
-            <span className="separator" />
-            <Link to="/secret">show me something cool →</Link>
-          </span>
-        </>
-      ) : (
-        <Link to="/login">let me in →</Link>
-      )}
-    </section>
+    <HomePageContainer>
+      <GridVideo videos={state.videos} />
+    </HomePageContainer>
   );
-}
+};
 
 export default HomePage;
