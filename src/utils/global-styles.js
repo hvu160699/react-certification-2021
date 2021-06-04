@@ -10,6 +10,19 @@ const GlobalStyles = () => {
         #root {
           height: 100%;
         }
+
+        body {
+          font-family: 'Ubuntu', sans-serif;
+        }
+
+        *,
+        *:after,
+        *:before {
+          -webkit-box-sizing: border-box;
+          -moz-box-sizing: border-box;
+          box-sizing: border-box;
+        }
+
         .sr-only {
           position: absolute;
           width: 1px;
@@ -21,12 +34,9 @@ const GlobalStyles = () => {
           border: 0;
         }
 
-        *,
-        *:after,
-        *:before {
-          -webkit-box-sizing: border-box;
-          -moz-box-sizing: border-box;
-          box-sizing: border-box;
+        svg {
+          width: 1.5rem;
+          height: 1.5rem;
         }
       `}
     />

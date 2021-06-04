@@ -2,7 +2,7 @@ import React, { memo } from 'react';
 import PropTypes from 'prop-types';
 import Button from '../Common/Button';
 
-const MenuButton = ({ toggleMenu = () => {} }) => {
+const MenuButton = ({ toggleMenu }) => {
   return (
     <Button onClick={toggleMenu}>
       <span className="sr-only">Open aside menu</span>

@@ -58,8 +58,8 @@ const VideoItem = ({ video }) => {
   );
 };
 
-VideoItem.defaultProps = {
-  video: PropTypes.object.isRequired,
+VideoItem.propTypes = {
+  video: PropTypes.objectOf(PropTypes.any).isRequired,
 };
 
 export default memo(VideoItem);

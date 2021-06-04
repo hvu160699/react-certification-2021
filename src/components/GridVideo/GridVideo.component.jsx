@@ -37,8 +37,8 @@ const GridVideo = ({ videos }) => {
   );
 };
 
-GridVideo.defaultProps = {
-  videos: PropTypes.array.isRequired,
+GridVideo.propTypes = {
+  videos: PropTypes.arrayOf(PropTypes.object).isRequired,
 };
 
 export default GridVideo;
