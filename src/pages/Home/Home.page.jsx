@@ -1,39 +1,37 @@
-import React, { useRef } from 'react';
-import { Link, useHistory } from 'react-router-dom';
+import React, { useEffect, useState } from 'react';
 
-import { useAuth } from '../../providers/Auth';
-import './Home.styles.css';
+import { $getVideos } from '../../api/videos';
 
-function HomePage() {
-  const history = useHistory();
-  const sectionRef = useRef(null);
-  const { authenticated, logout } = useAuth();
+import GridVideo from '../../components/GridVideo';
+import Container from '../../components/Common/Container';
 
-  function deAuthenticate(event) {
-    event.preventDefault();
-    logout();
-    history.push('/');
-  }
+const HomePage = () => {
+  const [videos, setVideo] = useState([]);
+  const [isLoading, setLoading] = useState(true);
+
+  const fetchVideos = async () => {
+    try {
+      const res = await $getVideos();
+
+      if (res.items) {
+        setVideo(res.items);
+      }
+    } catch (err) {
+      console.log(err);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  useEffect(() => {
+    fetchVideos();
+  }, []);
 
   return (
-    <section className="homepage" ref={sectionRef}>
-      <h1>Hello stranger!</h1>
-      {authenticated ? (
-        <>
-          <h2>Good to have you back</h2>
-          <span>
-            <Link to="/" onClick={deAuthenticate}>
-              ← logout
-            </Link>
-            <span className="separator" />
-            <Link to="/secret">show me something cool →</Link>
-          </span>
-        </>
-      ) : (
-        <Link to="/login">let me in →</Link>
-      )}
-    </section>
+    <Container className="mx-auto">
+      {!isLoading && <GridVideo videos={videos} />}
+    </Container>
   );
-}
+};
 
 export default HomePage;
