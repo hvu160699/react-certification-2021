@@ -38,6 +38,11 @@ const GlobalStyles = () => {
           width: 1.5rem;
           height: 1.5rem;
         }
+
+        .mx-auto {
+          margin-left: auto;
+          margin-right: auto;
+        }
       `}
     />
   );

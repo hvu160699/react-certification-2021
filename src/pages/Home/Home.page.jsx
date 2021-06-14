@@ -1,41 +1,36 @@
-import React, { useCallback, useEffect, useState } from 'react';
-import styled from '@emotion/styled';
+import React, { useEffect, useState } from 'react';
 
 import { $getVideos } from '../../api/videos';
 
 import GridVideo from '../../components/GridVideo';
 import Container from '../../components/Common/Container';
 
-const HomePageContainer = styled(Container)`
-  margin: auto;
-`;
-
 const HomePage = () => {
-  const [state, setState] = useState({
-    isLoading: true,
-    videos: [],
-  });
+  const [videos, setVideo] = useState([]);
+  const [isLoading, setLoading] = useState(true);
 
-  const fetchVideos = useCallback(async () => {
+  const fetchVideos = async () => {
     try {
       const res = await $getVideos();
 
       if (res.items) {
-        setState((prev) => ({ ...prev, isLoading: false, videos: res.items }));
+        setVideo(res.items);
       }
     } catch (err) {
       console.log(err);
+    } finally {
+      setLoading(false);
     }
-  }, []);
+  };
 
   useEffect(() => {
     fetchVideos();
-  }, [fetchVideos]);
+  }, []);
 
   return (
-    <HomePageContainer>
-      <GridVideo videos={state.videos} />
-    </HomePageContainer>
+    <Container className="mx-auto">
+      {!isLoading && <GridVideo videos={videos} />}
+    </Container>
   );
 };
 
