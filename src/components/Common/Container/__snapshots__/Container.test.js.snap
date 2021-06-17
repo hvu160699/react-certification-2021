@@ -1,0 +1,14 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Container Shoul render a container that can contain multiply element 1`] = `
+<div
+  className="css-1avkbq0"
+>
+  <div>
+    Find the button
+  </div>
+  <button>
+    Click me
+  </button>
+</div>
+`;

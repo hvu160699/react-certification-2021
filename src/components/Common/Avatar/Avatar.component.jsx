@@ -1,11 +1,8 @@
-import styled from '@emotion/styled';
+import React from 'react';
+import { StyledAvatar } from './Avatar.styled';
 
-const Avatar = styled.img`
-  display: inline-block;
-  width: 2.5rem;
-  height: 2.5rem;
-  border-radius: 9999px;
-  box-shadow: 0 0 0 0 #fff, 0 0 0 2px #fff, 0 0 #0000;
-`;
+import { DEFAULT_AVATAR } from '../../../utils/constants';
+
+const Avatar = (props) => <StyledAvatar src={DEFAULT_AVATAR} {...props} />;
 
 export default Avatar;

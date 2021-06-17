@@ -1,8 +1,27 @@
-import React, { memo } from 'react';
-import PropTypes from 'prop-types';
 import styled from '@emotion/styled';
 
-const VideoItemContainer = styled.div`
+const GridVideoContainer = styled.div`
+  width: 100%;
+  overflow: auto;
+  display: grid;
+  grid-template-columns: repeat(1, 1fr);
+  gap: 2rem;
+  padding: 1rem;
+
+  @media (min-width: 576px) {
+    grid-template-columns: repeat(2, 1fr);
+    padding-left: 2rem;
+    padding-right: 2rem;
+  }
+
+  @media (min-width: 1024px) {
+    grid-template-columns: repeat(3, 1fr);
+    padding-left: 4rem;
+    padding-right: 4rem;
+  }
+`;
+
+const GridVideoItem = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
@@ -42,24 +61,7 @@ const VideoItemContainer = styled.div`
   }
 `;
 
-const VideoItem = ({ video }) => {
-  const { title, description, thumbnails } = video;
-  return (
-    <VideoItemContainer>
-      <picture>
-        <source srcSet={thumbnails.high.url} media="(min-width: 1023.98px)" />
-        <img loading="lazy" src={thumbnails.medium.url} alt={title} />
-      </picture>
-      <div className="content">
-        <h1>{title || 'No title'}</h1>
-        <p>{description || ''}</p>
-      </div>
-    </VideoItemContainer>
-  );
-};
+GridVideoContainer.displayName = 'GridVideoContainer';
+GridVideoItem.displayName = 'GridVideoItem';
 
-VideoItem.propTypes = {
-  video: PropTypes.objectOf(PropTypes.any).isRequired,
-};
-
-export default memo(VideoItem);
+export { GridVideoContainer, GridVideoItem };
