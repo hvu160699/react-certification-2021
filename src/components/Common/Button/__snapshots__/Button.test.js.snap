@@ -3,6 +3,7 @@
 exports[`Button Shoul render a button that can contain multiply element 1`] = `
 <button
   className="css-oaqt4x"
+  type="button"
 >
   <img
     alt="img"

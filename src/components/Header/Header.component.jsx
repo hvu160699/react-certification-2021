@@ -9,8 +9,8 @@ import { HeaderContainer, HeaderSection } from './Header.styled';
 const Header = () => {
   const [isCheck, setCheck] = useState(false);
 
-  const handleToggle = () => {
-    setCheck(!isCheck);
+  const handleToggle = (e) => {
+    setCheck(e.target.checked);
   };
 
   return (

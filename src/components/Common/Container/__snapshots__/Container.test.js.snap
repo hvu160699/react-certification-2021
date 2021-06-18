@@ -7,7 +7,9 @@ exports[`Container Shoul render a container that can contain multiply element 1`
   <div>
     Find the button
   </div>
-  <button>
+  <button
+    type="button"
+  >
     Click me
   </button>
 </div>
