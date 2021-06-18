@@ -1,0 +1,54 @@
+yarn run v1.22.5
+$ react-scripts test --coverage --watchAll
+------------------------------|----------|----------|----------|----------|-------------------|
+File                          |  % Stmts | % Branch |  % Funcs |  % Lines | Uncovered Line #s |
+------------------------------|----------|----------|----------|----------|-------------------|
+All files                     |    85.71 |       70 |       60 |    85.19 |                   |
+ App                          |        0 |      100 |        0 |        0 |                   |
+  App.component.jsx           |        0 |      100 |        0 |        0 |                 9 |
+  index.js                    |        0 |        0 |        0 |        0 |                   |
+ Common/Avatar                |      100 |      100 |      100 |      100 |                   |
+  Avatar.component.jsx        |      100 |      100 |      100 |      100 |                   |
+  Avatar.styled.js            |      100 |      100 |      100 |      100 |                   |
+  index.js                    |        0 |        0 |        0 |        0 |                   |
+ Common/Button                |      100 |      100 |      100 |      100 |                   |
+  Button.component.jsx        |      100 |      100 |      100 |      100 |                   |
+  Button.styled.js            |      100 |      100 |      100 |      100 |                   |
+  index.js                    |        0 |        0 |        0 |        0 |                   |
+ Common/Container             |      100 |      100 |      100 |      100 |                   |
+  Container.component.jsx     |      100 |      100 |      100 |      100 |                   |
+  index.js                    |        0 |        0 |        0 |        0 |                   |
+ Common/Input                 |      100 |      100 |      100 |      100 |                   |
+  Input.component.jsx         |      100 |      100 |      100 |      100 |                   |
+  Input.styled.js             |      100 |      100 |      100 |      100 |                   |
+  index.js                    |        0 |        0 |        0 |        0 |                   |
+ Fortune                      |        0 |      100 |        0 |        0 |                   |
+  Fortune.component.jsx       |        0 |      100 |        0 |        0 |               7,9 |
+  index.js                    |        0 |        0 |        0 |        0 |                   |
+ GridVideo                    |      100 |      100 |      100 |      100 |                   |
+  GridVideo.component.jsx     |      100 |      100 |      100 |      100 |                   |
+  GridVideo.styled.js         |      100 |      100 |      100 |      100 |                   |
+  GridVideoItem.component.jsx |      100 |      100 |      100 |      100 |                   |
+  index.js                    |        0 |        0 |        0 |        0 |                   |
+ Header                       |    85.71 |      100 |       50 |    85.71 |                   |
+  Header.component.jsx        |       80 |      100 |       50 |       80 |                13 |
+  Header.styled.js            |      100 |      100 |      100 |      100 |                   |
+  index.js                    |        0 |        0 |        0 |        0 |                   |
+ Layout                       |        0 |      100 |        0 |        0 |                   |
+  Layout.component.jsx        |        0 |      100 |        0 |        0 |                 5 |
+  index.js                    |        0 |        0 |        0 |        0 |                   |
+ Private                      |        0 |        0 |        0 |        0 |                   |
+  Private.component.jsx       |        0 |        0 |        0 |        0 |            7,9,10 |
+  index.js                    |        0 |        0 |        0 |        0 |                   |
+ SearchBar                    |      100 |      100 |      100 |      100 |                   |
+  SearchBar.component.jsx     |      100 |      100 |      100 |      100 |                   |
+  SearchBar.styled.js         |      100 |      100 |      100 |      100 |                   |
+  index.js                    |        0 |        0 |        0 |        0 |                   |
+ ToggleSwitch                 |      100 |       50 |      100 |      100 |                   |
+  ToggleSwitch.component.jsx  |      100 |       50 |      100 |      100 |                17 |
+  ToggleSwitch.styled.js      |      100 |      100 |      100 |      100 |                   |
+  index.js                    |        0 |        0 |        0 |        0 |                   |
+------------------------------|----------|----------|----------|----------|-------------------|
+
+
+Done in 17.00s.
