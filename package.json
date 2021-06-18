@@ -1,5 +1,12 @@
 {
   "name": "react-certification-2020",
+  "jest": {
+    "collectCoverageFrom": [
+      "<rootDir>/src/components/**/*.{js,jsx}",
+      "!**/node_modules/**",
+      "!**/vendor/**"
+    ]
+  },
   "version": "0.1.0",
   "private": true,
   "dependencies": {
