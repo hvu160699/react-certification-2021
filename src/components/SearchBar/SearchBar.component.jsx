@@ -1,11 +1,13 @@
 import React from 'react';
+import propTypes from 'prop-types';
+
 import {
   SearchBarContainer,
   SearchIconWrapper,
   SearchBarInput,
 } from './SearchBar.styled';
 
-const SearchBar = ({ placeholder = 'Search...', value = '', onChange }) => {
+const SearchBar = ({ placeholder, value, onChange, onKeyDown }) => {
   return (
     <SearchBarContainer>
       <SearchIconWrapper>
@@ -28,9 +30,21 @@ const SearchBar = ({ placeholder = 'Search...', value = '', onChange }) => {
         placeholder={placeholder}
         value={value}
         onChange={onChange}
+        onKeyDown={onKeyDown}
       />
     </SearchBarContainer>
   );
+};
+
+SearchBar.propTypes = {
+  placeholder: propTypes.string,
+  value: propTypes.string.isRequired,
+  onChange: propTypes.func.isRequired,
+  onKeyDown: propTypes.func.isRequired,
+};
+
+SearchBar.defaultProps = {
+  placeholder: 'Search...',
 };
 
 export default SearchBar;
