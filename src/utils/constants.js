@@ -894,4 +894,14 @@ const ROUTES = [
   },
 ];
 
-export { AUTH_STORAGE_KEY, API_URL, API_KEY, DEFAULT_AVATAR, FAKE_VIDEOS_DATA, ROUTES };
+const YOUTUBE_VIDEO_URL = 'https://www.youtube.com/embed/';
+
+export {
+  AUTH_STORAGE_KEY,
+  API_URL,
+  API_KEY,
+  DEFAULT_AVATAR,
+  FAKE_VIDEOS_DATA,
+  ROUTES,
+  YOUTUBE_VIDEO_URL,
+};

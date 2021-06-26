@@ -20,4 +20,14 @@ const $getVideos = (queryData) => {
   return get(parameters);
 };
 
-export { $getVideos };
+const $getVideoDetail = (queryData) => {
+  const querystring = createQuerystring(queryData);
+
+  const parameters = {
+    url: `videos${querystring}`,
+  };
+
+  return get(parameters);
+};
+
+export { $getVideos, $getVideoDetail };

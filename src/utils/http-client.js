@@ -12,7 +12,7 @@ const $ = axios.create({
 
 $.interceptors.request.use(
   (config) => {
-    const newConfig = { ...config, params: key };
+    const newConfig = { ...config, params: { key } };
 
     return newConfig;
   },
