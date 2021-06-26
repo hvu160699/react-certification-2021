@@ -1,35 +1,51 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useCallback } from 'react';
 
 import { $getVideos } from '../../api/videos';
 
 import GridVideo from '../../components/GridVideo';
 import Container from '../../components/Common/Container';
+import { useVideoContext } from '../../providers/Video';
 
 const HomePage = () => {
-  const [videos, setVideo] = useState([]);
-  const [isLoading, setLoading] = useState(true);
+  const { state, dispatch } = useVideoContext();
 
-  const fetchVideos = async () => {
+  const fetchVideos = useCallback(async () => {
+    dispatch({ type: 'VIDEO/FETCH_PROCESSING' });
     try {
-      const res = await $getVideos();
+      const queryData = {
+        q: state.q,
+        chart: 'mostPopular',
+        regionCode: 'vn',
+        part: ['snippet'],
+        type: 'video',
+        maxResults: 5,
+      };
 
-      if (res.items) {
-        setVideo(res.items);
-      }
+      const res = await $getVideos(queryData);
+
+      if (res.items.length > 0)
+        dispatch({ type: 'VIDEO/FETCH_LIST_SUCCESS', payload: res.items });
     } catch (err) {
-      console.log(err);
-    } finally {
-      setLoading(false);
+      dispatch({ type: 'VIDEO/FETCH_FAILURE' });
     }
-  };
+  }, [state.q, dispatch]);
+
+  const handleSelectVideo = useCallback(
+    (videoId) => {
+      dispatch({ type: 'VIDEO/SELECT_VIDEO', payload: videoId });
+    },
+    [dispatch]
+  );
 
   useEffect(() => {
     fetchVideos();
-  }, []);
+  }, [fetchVideos]);
 
   return (
     <Container className="mx-auto">
-      {!isLoading && <GridVideo videos={videos} />}
+      {!state.isLoading && (
+        <GridVideo videos={state.videos} handleSelect={handleSelectVideo} />
+      )}
     </Container>
   );
 };

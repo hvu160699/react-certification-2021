@@ -7,7 +7,9 @@ const reducer = (state, action) => {
       return { ...state, selectedVideo: payload };
     case 'VIDEO/FETCH_PROCESSING':
       return { ...state, isLoading: true };
-    case 'VIDEO/FETCH_SUCCESS':
+    case 'VIDEO/FETCH_DETAIL_SUCCESS':
+      return { ...state, isLoading: false, video: payload };
+    case 'VIDEO/FETCH_LIST_SUCCESS':
       return { ...state, isLoading: false, videos: payload };
     case 'VIDEO/FETCH_FAILURE':
       return { ...state, isLoading: false, isError: true };

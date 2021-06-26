@@ -5,12 +5,22 @@ import Avatar from '../Common/Avatar';
 import ToggleSwitch from '../ToggleSwitch';
 import Button from '../Common/Button';
 import { HeaderContainer, HeaderSection } from './Header.styled';
+import { useVideoContext } from '../../providers/Video';
 
 const Header = () => {
+  const { dispatch } = useVideoContext();
+
+  const [keyword, setKeyword] = useState('');
   const [isCheck, setCheck] = useState(false);
 
   const handleToggle = (e) => {
     setCheck(e.target.checked);
+  };
+
+  const handleOnChange = (e) => setKeyword(e.target.value);
+
+  const handleKeyPress = (e) => {
+    if (e.key === 'Enter') dispatch({ type: 'VIDEO/SET_KEYWORD', payload: keyword });
   };
 
   return (
@@ -33,7 +43,7 @@ const Header = () => {
             />
           </svg>
         </Button>
-        <SearchBar />
+        <SearchBar value={keyword} onChange={handleOnChange} onKeyDown={handleKeyPress} />
       </HeaderSection>
       <HeaderSection>
         <div style={{ marginRight: '1rem' }}>
