@@ -2,7 +2,7 @@ import React, { useContext, useReducer } from 'react';
 import reducer from './Video.reducer';
 
 const VideoContextValue = {
-  video: {},
+  video: undefined,
   videos: [],
   q: '',
   isLoading: false,
