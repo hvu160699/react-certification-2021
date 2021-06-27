@@ -5,4 +5,6 @@ const StyledLink = styled(Link)`
   text-decoration: none;
 `;
 
+StyledLink.name = 'Link';
+
 export { StyledLink };
