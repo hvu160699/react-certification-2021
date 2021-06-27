@@ -1,12 +1,14 @@
 import React, { useCallback, useEffect, useMemo } from 'react';
 import { useLocation } from 'react-router';
 
-import Container from '../../components/Common/Container';
 import GridVideo from '../../components/GridVideo';
+// import VideoDetail from '../../components/VideoDetail/VideoDetail.component';
+
+import { WatchPageContainer } from './Watch.styled';
 import { useVideoContext } from '../../providers/Video';
 
 import { $getVideoDetail } from '../../api/videos';
-import { YOUTUBE_VIDEO_URL } from '../../utils/constants';
+import { FAKE_VIDEOS_DATA } from '../../utils/constants';
 
 const WatchPage = () => {
   const { search } = useLocation();
@@ -19,6 +21,7 @@ const WatchPage = () => {
   }, [search]);
 
   const fetchVideoDetail = useCallback(async () => {
+    console.log('start');
     dispatch({ type: 'VIDEO/FETCH_PROCESSING' });
     try {
       const queryData = {
@@ -29,6 +32,7 @@ const WatchPage = () => {
       const res = await $getVideoDetail(queryData);
 
       dispatch({ type: 'VIDEO/FETCH_DETAIL_SUCCESS', payload: res.items[0] });
+      dispatch({ type: 'VIDEO/FETCH_LIST_SUCCESS', payload: FAKE_VIDEOS_DATA });
     } catch (err) {
       dispatch({ type: 'VIDEO/FETCH_FAILURE' });
     }
@@ -38,38 +42,19 @@ const WatchPage = () => {
     fetchVideoDetail();
   }, [fetchVideoDetail]);
 
-  console.log(state.isLoading);
-
   return (
-    <Container className="mx-auto">
+    <WatchPageContainer>
       {!state.isLoading && state.video && (
-        <div
-          style={{
-            display: 'grid',
-            gridTemplateColumns: 'repeat(12, minmax(0, 1fr))',
-            gap: '1rem',
-          }}
-        >
-          <div style={{ gridColumn: '1 / span 8' }}>
-            <iframe
-              style={{ width: '100%', height: 425 }}
-              title={state.video.snippet.title}
-              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-              allowFullScreen
-              src={`${YOUTUBE_VIDEO_URL}${videoId}`}
-            />
-            <div>{state.video.snippet.channelTitle}</div>
-            <div>{state.video.snippet.title}</div>
-            <div>
-              {state.video.statistics.viewCount} views - {state.video.snippet.publishedAt}
-            </div>
-          </div>
-          <div style={{ width: '100%', gridColumnStart: 9, gridColumnEnd: -1 }}>
-            <GridVideo videos={state.videos} handleSelect={null} />
-          </div>
-        </div>
+        <>
+          {/* <section className="watch-section">
+            <VideoDetail video={state.video} videoId={videoId} />
+          </section> */}
+          <section className="list-section">
+            <GridVideo videos={state.videos} vertical />
+          </section>
+        </>
       )}
-    </Container>
+    </WatchPageContainer>
   );
 };
 
