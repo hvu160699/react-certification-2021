@@ -30,22 +30,13 @@ const HomePage = () => {
     }
   }, [state.q, dispatch]);
 
-  const handleSelectVideo = useCallback(
-    (videoId) => {
-      dispatch({ type: 'VIDEO/SELECT_VIDEO', payload: videoId });
-    },
-    [dispatch]
-  );
-
   useEffect(() => {
     fetchVideos();
   }, [fetchVideos]);
 
   return (
     <Container className="mx-auto">
-      {!state.isLoading && (
-        <GridVideo videos={state.videos} handleSelect={handleSelectVideo} />
-      )}
+      {!state.isLoading && <GridVideo videos={state.videos} />}
     </Container>
   );
 };

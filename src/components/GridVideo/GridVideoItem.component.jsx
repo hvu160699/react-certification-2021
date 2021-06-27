@@ -3,17 +3,26 @@ import PropTypes from 'prop-types';
 
 import { GridVideoItem } from './GridVideo.styled';
 
-const VideoItem = ({ video }) => {
-  const { title, description, thumbnails } = video;
+const VideoItem = ({ video, vertical }) => {
+  const { snippet } = video;
   return (
-    <GridVideoItem>
-      <picture>
-        <source srcSet={thumbnails.high.url} media="(min-width: 1023.98px)" />
-        <img loading="lazy" src={thumbnails.medium.url} alt={title} />
-      </picture>
+    <GridVideoItem vertical={vertical}>
+      <div className="thumbnail">
+        <picture>
+          <source srcSet={snippet.thumbnails.high.url} media="(min-width: 1023.98px)" />
+          <img loading="lazy" src={snippet.thumbnails.medium.url} alt={snippet.title} />
+        </picture>
+      </div>
       <div className="content">
-        <h1>{title}</h1>
-        <p>{description}</p>
+        <h3>
+          <span>{snippet.title}</span>
+        </h3>
+        <div className="statistics">
+          <div className="row">
+            <span>{snippet.channelTitle}</span>
+          </div>
+          <div className="row">{/* <span>{statistics.viewCount}</span> */}</div>
+        </div>
       </div>
     </GridVideoItem>
   );
@@ -21,6 +30,11 @@ const VideoItem = ({ video }) => {
 
 VideoItem.propTypes = {
   video: PropTypes.objectOf(PropTypes.any).isRequired,
+  vertical: PropTypes.bool,
+};
+
+VideoItem.defaultProps = {
+  vertical: false,
 };
 
 export default memo(VideoItem);

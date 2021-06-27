@@ -7,18 +7,13 @@ import Link from '../Common/Link';
 
 import { GridVideoContainer } from './GridVideo.styled';
 
-const GridVideo = ({ videos, handleSelect }) => {
+const GridVideo = ({ videos, vertical }) => {
   return (
-    <GridVideoContainer>
+    <GridVideoContainer vertical={vertical}>
       {videos && videos.length > 0 ? (
         videos.map((video) => (
-          <Link
-            key={video.etag}
-            to={`/watch?v=${video.id.videoId}`}
-            role="button"
-            onClick={() => handleSelect(video.id.videoId)}
-          >
-            <VideoItem video={video.snippet} />
+          <Link key={video.etag} to={`/watch?v=${video.id.videoId}`} role="link">
+            <VideoItem video={video} vertical={vertical} />
           </Link>
         ))
       ) : (
@@ -29,8 +24,12 @@ const GridVideo = ({ videos, handleSelect }) => {
 };
 
 GridVideo.propTypes = {
+  vertical: PropTypes.bool,
   videos: PropTypes.arrayOf(PropTypes.object).isRequired,
-  handleSelect: PropTypes.func.isRequired,
+};
+
+GridVideo.defaultProps = {
+  vertical: false,
 };
 
 export default GridVideo;

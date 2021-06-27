@@ -4,7 +4,7 @@ const reducer = (state, action) => {
     case 'VIDEO/SET_KEYWORD':
       return { ...state, q: payload };
     case 'VIDEO/SELECT_VIDEO':
-      return { ...state, selectedVideo: payload };
+      return { ...state };
     case 'VIDEO/FETCH_PROCESSING':
       return { ...state, isLoading: true };
     case 'VIDEO/FETCH_DETAIL_SUCCESS':
