@@ -7,10 +7,12 @@ const reducer = (state, action) => {
       return { ...state };
     case 'VIDEO/FETCH_PROCESSING':
       return { ...state, isLoading: true };
-    case 'VIDEO/FETCH_DETAIL_SUCCESS':
-      return { ...state, isLoading: false, video: payload };
+    case 'VIDEO/FETCH_DETAIL_SUCCESS': {
+      const { video, videos } = payload;
+      return { ...state, video, videos, isLoading: false };
+    }
     case 'VIDEO/FETCH_LIST_SUCCESS':
-      return { ...state, isLoading: false, videos: payload };
+      return { ...state, videos: payload, isLoading: false };
     case 'VIDEO/FETCH_FAILURE':
       return { ...state, isLoading: false, isError: true };
     default:

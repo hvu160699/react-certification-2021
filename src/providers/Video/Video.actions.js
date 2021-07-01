@@ -14,14 +14,20 @@ const fetchVideos = (queryData) => {
   };
 };
 
-const fetchVideoDetail = (queryData) => {
+const fetchVideoDetail = (querySingle, queryList) => {
   return async (dispatch) => {
     dispatch({ type: 'VIDEO/FETCH_PROCESSING' });
 
     try {
-      const res = await $getVideoDetail(queryData);
+      const [single, list] = await Promise.all([
+        $getVideoDetail(querySingle),
+        $getVideos(queryList),
+      ]);
 
-      dispatch({ type: 'VIDEO/FETCH_DETAIL_SUCCESS', payload: res.items[0].snippet });
+      dispatch({
+        type: 'VIDEO/FETCH_DETAIL_SUCCESS',
+        payload: { video: single.items[0].snippet, videos: list.items },
+      });
     } catch (err) {
       dispatch({ type: 'VIDEO/FETCH_FAILURE' });
     }
