@@ -27,4 +27,19 @@ function createQuerystring(queryData) {
   return queryString;
 }
 
-export { random, loader, createQuerystring };
+function formatNumber(value, type = 'dot') {
+  const separate = type === 'dot' ? '.' : ',';
+
+  return value.replace(/\B(?=(?:\d{3})+(?!\d))/g, separate);
+}
+
+function appendHashTag(tags) {
+  if (Array.isArray(tags)) return tags.map((t) => `#${t}`).join(' ');
+  if (typeof tags === 'string') return `#${tags}`;
+}
+
+function toDateString(date) {
+  return new Date(date).toDateString();
+}
+
+export { random, loader, createQuerystring, formatNumber, appendHashTag, toDateString };
