@@ -1,14 +1,20 @@
 import styled from '@emotion/styled';
 
-const VideoFrame = styled.div`
-  iframe {
-    width: 100%;
+const VideoFrame = styled.iframe`
+  width: 100%;
+  height: 260px;
+
+  @media (min-width: 768px) {
+    height: 360px;
+  }
+
+  @media (min-width: 1024px) {
     height: 425px;
   }
 `;
 
 const VideoContent = styled.div`
-  padding: 1.25rem 0;
+  padding: 1rem 0;
 
   h1 {
     display: block;
@@ -35,7 +41,20 @@ const VideoTags = styled.div`
 const VideoStatistics = styled.div`
   display: flex;
   flex-direction: row;
-  align-items: center;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+
+  span {
+    color: gray;
+    line-height: 1rem;
+  }
 `;
 
-export { VideoFrame, VideoContent, VideoTags, VideoStatistics };
+const Styled = {
+  VideoFrame,
+  VideoContent,
+  VideoTags,
+  VideoStatistics,
+};
+
+export default Styled;
