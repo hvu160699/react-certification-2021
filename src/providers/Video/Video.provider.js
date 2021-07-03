@@ -1,5 +1,6 @@
 import React, { useContext, useReducer } from 'react';
 import reducer from './Video.reducer';
+import actions from './Video.actions';
 
 const VideoContextValue = {
   video: undefined,
@@ -9,7 +10,11 @@ const VideoContextValue = {
   isError: false,
 };
 
-const VideoContext = React.createContext(VideoContextValue);
+const VideoContext = React.createContext({
+  state: { ...VideoContextValue },
+  dispatch: () => {},
+  actions: {},
+});
 
 const useVideoContext = () => {
   const context = useContext(VideoContext);
@@ -25,7 +30,7 @@ const VideoProvider = (props) => {
   const [state, dispatch] = useReducer(reducer, VideoContextValue);
 
   return (
-    <VideoContext.Provider value={{ state, dispatch }}>
+    <VideoContext.Provider value={{ state, dispatch, actions }}>
       {props.children}
     </VideoContext.Provider>
   );
