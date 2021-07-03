@@ -4,6 +4,7 @@ import GridVideo from '../../components/GridVideo';
 import Container from '../../components/Common/Container';
 import { useVideoContext } from '../../providers/Video';
 import { withPageLayout } from '../../components/Layout';
+import Loading from '../../components/Common/Loading';
 
 const HomePage = () => {
   const {
@@ -30,10 +31,10 @@ const HomePage = () => {
 
   return (
     <Container className="mx-auto">
-      {!state.isLoading ? (
+      {state.isLoading ? (
         state.videos && <GridVideo videos={state.videos} />
       ) : (
-        <div>is loading</div>
+        <Loading />
       )}
     </Container>
   );
