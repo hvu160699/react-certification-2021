@@ -8,7 +8,7 @@ const VideoDetail = ({ video, videoId }) => {
   const { snippet, statistics } = video;
 
   return (
-    <React.Fragment>
+    <>
       <Styled.VideoFrame
         title={snippet.title}
         allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
@@ -26,7 +26,7 @@ const VideoDetail = ({ video, videoId }) => {
           <span>{toDateString(snippet.publishedAt)}</span>
         </Styled.VideoStatistics>
       </Styled.VideoContent>
-    </React.Fragment>
+    </>
   );
 };
 

@@ -3,12 +3,18 @@ import styled from '@emotion/styled';
 const GridVideoContainer = styled.div`
   max-width: 100%;
   display: grid;
-  grid-template-columns: repeat(1, minmax(0, 1fr));
-  gap: ${(props) => (props.vertical ? '1rem 0' : '2rem')};
+  ${(props) =>
+    props.vertical
+      ? `grid-template-columns: repeat(1, minmax(0, 1fr));
+         gap: 1rem 0;
+        `
+      : `grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 1rem;
+      `}
 
-  @media (min-width: 576px) {
+  @media (min-width: 640px) {
     grid-template-columns: ${(props) =>
-      props.vertical ? 'auto' : 'repeat(1, minmax(0, 1fr))'};
+      props.vertical ? 'auto' : 'repeat(3, minmax(0, 1fr))'};
   }
 
   @media (min-width: 1024px) {
@@ -28,22 +34,45 @@ const GridVideoItem = styled.div`
 
   .thumbnail {
     display: block;
+    position: relative;
     flex: none;
-    width: 168px;
+    ${(props) =>
+      props.vertical
+        ? `width: 168px;
+    margin-right: 0.5rem;`
+        : `width: 100%;
+          margin-bottom: 0.5rem;
+        `}
     height: 94px;
-    margin-right: 0.5rem;
 
-    picture {
+    @media (min-width: 640px) {
+      height: ${(props) => (props.vertical ? '' : '188px')};
+    }
+
+    .img-wrapper {
       display: block;
-      margin-left: auto;
-      margin-right: auto;
       height: 100%;
       overflow: hidden;
+      margin-left: auto;
+      margin-right: auto;
+      position: absolute;
+      top: 0;
+      right: 0;
+      bottom: 0;
+      left: 0;
+      background: #000000;
 
       img {
         display: block;
         width: 100%;
-        max-height: 100%;
+        max-height: none;
+        max-width: 100%;
+        margin-left: auto;
+        margin-right: auto;
+        position: absolute;
+        transform: translateY(-50%);
+        top: 50%;
+        left: 0;
       }
     }
   }
@@ -61,7 +90,7 @@ const GridVideoItem = styled.div`
         display: -webkit-box;
         -webkit-line-clamp: 2;
         -webkit-box-orient: vertical;
-        max-height: cal(2 * 2rem);
+        max-height: inherit;
         overflow: hidden;
         color: #111827;
         text-overflow: ellipsis;

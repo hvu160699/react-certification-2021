@@ -8,7 +8,7 @@ const VideoItem = ({ video, vertical }) => {
   return (
     <GridVideoItem vertical={vertical}>
       <div className="thumbnail">
-        <picture>
+        <picture className="img-wrapper">
           <source srcSet={snippet.thumbnails.high.url} media="(min-width: 1023.98px)" />
           <img loading="lazy" src={snippet.thumbnails.medium.url} alt={snippet.title} />
         </picture>
@@ -21,7 +21,6 @@ const VideoItem = ({ video, vertical }) => {
           <div className="row">
             <span>{snippet.channelTitle}</span>
           </div>
-          <div className="row">{/* <span>{statistics.viewCount}</span> */}</div>
         </div>
       </div>
     </GridVideoItem>
