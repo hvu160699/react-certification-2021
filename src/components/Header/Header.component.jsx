@@ -8,7 +8,10 @@ import { HeaderContainer, HeaderSection } from './Header.styled';
 import { useVideoContext } from '../../providers/Video';
 
 const Header = () => {
-  const { dispatch } = useVideoContext();
+  const {
+    dispatch,
+    actions: { handleSearchVideos },
+  } = useVideoContext();
 
   const [keyword, setKeyword] = useState('');
   const [isCheck, setCheck] = useState(false);
@@ -20,7 +23,7 @@ const Header = () => {
   const handleOnChange = (e) => setKeyword(e.target.value);
 
   const handleKeyPress = (e) => {
-    if (e.key === 'Enter') dispatch({ type: 'VIDEO/SET_KEYWORD', payload: keyword });
+    if (e.key === 'Enter') handleSearchVideos(keyword)(dispatch);
   };
 
   return (
