@@ -3,10 +3,14 @@ import React, { useEffect, useCallback } from 'react';
 import GridVideo from '../../components/GridVideo';
 import Container from '../../components/Common/Container';
 import { useVideoContext } from '../../providers/Video';
-import { fetchVideos } from '../../providers/Video/Video.actions';
+import { withPageLayout } from '../../components/Layout';
 
 const HomePage = () => {
-  const { state, dispatch } = useVideoContext();
+  const {
+    state,
+    dispatch,
+    actions: { fetchVideos },
+  } = useVideoContext();
 
   const handleFetchVideos = useCallback(async () => {
     const queryData = {
@@ -18,8 +22,8 @@ const HomePage = () => {
       maxResults: 5,
     };
 
-    dispatch(fetchVideos(queryData));
-  }, [state.q, dispatch]);
+    fetchVideos(queryData)(dispatch);
+  }, [state.q, dispatch, fetchVideos]);
 
   useEffect(() => {
     handleFetchVideos();
@@ -32,4 +36,4 @@ const HomePage = () => {
   );
 };
 
-export default HomePage;
+export default withPageLayout(HomePage);

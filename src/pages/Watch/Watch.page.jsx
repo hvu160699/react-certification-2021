@@ -1,16 +1,20 @@
 import React, { useCallback, useEffect, useMemo } from 'react';
 import { useLocation } from 'react-router';
 
+import Styled from './Watch.styled';
 import GridVideo from '../../components/GridVideo';
 import VideoDetail from '../../components/VideoDetail/VideoDetail.component';
+import { withPageLayout } from '../../components/Layout';
 
-import Styled from './Watch.styled';
 import { useVideoContext } from '../../providers/Video';
-import { fetchVideoDetail } from '../../providers/Video/Video.actions';
 
 const WatchPage = () => {
   const { search } = useLocation();
-  const { state, dispatch } = useVideoContext();
+  const {
+    state,
+    dispatch,
+    actions: { fetchVideoDetail },
+  } = useVideoContext();
 
   const videoId = useMemo(() => {
     const id = search.replace('?v=', '');
@@ -30,29 +34,27 @@ const WatchPage = () => {
       relatedToVideoId: videoId,
     };
 
-    dispatch(fetchVideoDetail(querySingle, queryList));
-  }, [videoId, dispatch]);
+    fetchVideoDetail(querySingle, queryList)(dispatch);
+  }, [videoId, dispatch, fetchVideoDetail]);
 
   useEffect(() => {
     handleFetchVideoDetail();
   }, [handleFetchVideoDetail]);
 
   return (
-    <Styled.Layout>
-      <Styled.MainContainer>
-        {!state.isLoading && (
-          <>
-            <section className="watch-section">
-              {state.video && <VideoDetail video={state.video} videoId={videoId} />}
-            </section>
-            <section className="list-section">
-              <GridVideo videos={state.videos} vertical />
-            </section>
-          </>
-        )}
-      </Styled.MainContainer>
-    </Styled.Layout>
+    <Styled.WatchPageContainer>
+      {!state.isLoading && (
+        <>
+          <section className="watch-section">
+            {state.video && <VideoDetail video={state.video} videoId={videoId} />}
+          </section>
+          <section className="list-section">
+            <GridVideo videos={state.videos} vertical />
+          </section>
+        </>
+      )}
+    </Styled.WatchPageContainer>
   );
 };
 
-export default WatchPage;
+export default withPageLayout(WatchPage);
