@@ -26,6 +26,7 @@ const WatchPage = () => {
     const querySingle = {
       part: ['snippet', 'contentDetails', 'statistics'],
       id: videoId,
+      type: 'video',
     };
 
     const queryList = {
@@ -49,7 +50,7 @@ const WatchPage = () => {
             {state.video && <VideoDetail video={state.video} videoId={videoId} />}
           </section>
           <section className="list-section">
-            <GridVideo videos={state.videos} vertical />
+            {state.videos && <GridVideo videos={state.videos} vertical />}
           </section>
         </>
       )}

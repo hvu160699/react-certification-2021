@@ -5,7 +5,7 @@ import { GridVideoItem } from './GridVideo.styled';
 
 const VideoItem = ({ video, vertical }) => {
   const { snippet } = video;
-  return (
+  return snippet ? (
     <GridVideoItem vertical={vertical}>
       <div className="thumbnail">
         <picture className="img-wrapper">
@@ -24,7 +24,7 @@ const VideoItem = ({ video, vertical }) => {
         </div>
       </div>
     </GridVideoItem>
-  );
+  ) : null;
 };
 
 VideoItem.propTypes = {

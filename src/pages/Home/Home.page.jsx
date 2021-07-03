@@ -16,7 +16,6 @@ const HomePage = () => {
     const queryData = {
       q: state.q,
       chart: 'mostPopular',
-      regionCode: 'vn',
       part: ['snippet'],
       type: 'video',
       maxResults: 5,
@@ -31,7 +30,11 @@ const HomePage = () => {
 
   return (
     <Container className="mx-auto">
-      {!state.isLoading && <GridVideo videos={state.videos} />}
+      {!state.isLoading ? (
+        state.videos && <GridVideo videos={state.videos} />
+      ) : (
+        <div>is loading</div>
+      )}
     </Container>
   );
 };

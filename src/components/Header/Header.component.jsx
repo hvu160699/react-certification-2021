@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
 
+import { useHistory, useLocation } from 'react-router-dom';
+
 import SearchBar from '../SearchBar';
 import Avatar from '../Common/Avatar';
 import ToggleSwitch from '../ToggleSwitch';
@@ -8,6 +10,9 @@ import { HeaderContainer, HeaderSection } from './Header.styled';
 import { useVideoContext } from '../../providers/Video';
 
 const Header = () => {
+  const { pathname } = useLocation();
+  const history = useHistory();
+
   const {
     dispatch,
     actions: { handleSearchVideos },
@@ -23,7 +28,11 @@ const Header = () => {
   const handleOnChange = (e) => setKeyword(e.target.value);
 
   const handleKeyPress = (e) => {
-    if (e.key === 'Enter') handleSearchVideos(keyword)(dispatch);
+    if (e.key === 'Enter') {
+      handleSearchVideos(keyword)(dispatch);
+
+      return pathname.length > 1 && history.push('/');
+    }
   };
 
   return (
