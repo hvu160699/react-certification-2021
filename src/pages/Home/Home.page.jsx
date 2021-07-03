@@ -31,7 +31,7 @@ const HomePage = () => {
 
   return (
     <Container className="mx-auto">
-      {state.isLoading ? (
+      {!state.isLoading ? (
         state.videos && <GridVideo videos={state.videos} />
       ) : (
         <Loading />
