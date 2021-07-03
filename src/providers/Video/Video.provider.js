@@ -10,8 +10,8 @@ const VideoContextValue = {
   isError: false,
 };
 
-const VideoContext = React.createContext({
-  state: { ...VideoContextValue },
+export const VideoContext = React.createContext({
+  state: {},
   dispatch: () => {},
   actions: {},
 });
@@ -28,6 +28,18 @@ const useVideoContext = () => {
 
 const VideoProvider = (props) => {
   const [state, dispatch] = useReducer(reducer, VideoContextValue);
+  // const [enhancedActions, setEnhancedActions] = useState({});
+
+  // useEffect(() => {
+  //   Object.keys(actions).forEach((key) =>
+  //     setEnhancedActions((e) => ({
+  //       ...e,
+  //       [key]: (...args) => {
+  //         actions[key](...args)(dispatch);
+  //       },
+  //     }))
+  //   );
+  // }, []);
 
   return (
     <VideoContext.Provider value={{ state, dispatch, actions }}>

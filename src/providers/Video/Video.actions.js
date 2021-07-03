@@ -27,9 +27,12 @@ const fetchVideoDetail = (querySingle, queryList) => {
         $getVideos(queryList),
       ]);
 
+      const videos =
+        list.items && list.items.filter((item) => item.snippet !== undefined);
+
       dispatch({
         type: 'VIDEO/FETCH_DETAIL_SUCCESS',
-        payload: { video: single.items[0], videos: list.items },
+        payload: { video: single.items[0], videos },
       });
     } catch (err) {
       dispatch({ type: 'VIDEO/FETCH_FAILURE' });
@@ -37,9 +40,6 @@ const fetchVideoDetail = (querySingle, queryList) => {
   };
 };
 
-const handleSelectVideo = (videoId) => (dispatch) =>
-  dispatch({ type: 'VIDEO/SELECT_VIDEO', payload: videoId });
-
-const actions = { handleSearchVideos, fetchVideos, fetchVideoDetail, handleSelectVideo };
+const actions = { handleSearchVideos, fetchVideos, fetchVideoDetail };
 
 export default actions;
