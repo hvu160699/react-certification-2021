@@ -17,6 +17,9 @@ const Page = styled(Main)`
   }
 `;
 
+Main.displayName = 'MainLayout';
+Page.displayName = 'PageLayout';
+
 const Styled = {
   Main,
   Page,

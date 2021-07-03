@@ -50,6 +50,11 @@ const VideoStatistics = styled.div`
   }
 `;
 
+VideoFrame.displayName = 'VideoIframe';
+VideoContent.displayName = 'VideoContent';
+VideoTags.displayName = 'VideoTags';
+VideoStatistics.displayName = 'VideoStatistics';
+
 const Styled = {
   VideoFrame,
   VideoContent,

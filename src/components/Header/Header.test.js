@@ -5,10 +5,25 @@ import { shallow } from 'enzyme';
 import Header from './Header.component';
 import Avatar from '../Common/Avatar';
 
-describe('Header', () => {
-  it('Should render <Header /> that contains <Avatar /> component', () => {
-    const header = shallow(<Header />);
+jest.mock('react-router-dom', () => {
+  const originalModule = jest.requireActual('react-router-dom');
 
-    expect(header.containsMatchingElement(<Avatar />)).toBeTruthy();
+  return {
+    ...originalModule,
+    useLocation: () => ({
+      pathname: '/',
+    }),
+  };
+});
+
+describe('Header test suit', () => {
+  const setState = jest.fn();
+  const useStateSpy = jest.spyOn(React, 'useState');
+  useStateSpy.mockImplementation((init) => [init, setState]);
+
+  it('Should render component that contains <Avatar />', () => {
+    const wrapper = shallow(<Header />);
+
+    expect(wrapper.containsMatchingElement(<Avatar />)).toBeTruthy();
   });
 });
