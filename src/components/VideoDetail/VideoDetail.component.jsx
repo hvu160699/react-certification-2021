@@ -16,9 +16,11 @@ const VideoDetail = ({ video, videoId }) => {
         src={`${YOUTUBE_VIDEO_URL}${videoId}`}
       />
       <Styled.VideoContent>
-        <Styled.VideoTags>
-          {snippet.tags && <span>{appendHashTag(snippet.tags.slice(0, 3))}</span>}
-        </Styled.VideoTags>
+        {snippet.tags && (
+          <Styled.VideoTags>
+            <span>{appendHashTag(snippet.tags.slice(0, 3))}</span>
+          </Styled.VideoTags>
+        )}
         <h1>{snippet.title}</h1>
         <Styled.VideoStatistics>
           <span>{`${formatNumber(statistics.viewCount)} views`}</span>
