@@ -1,39 +1,13 @@
 import React, { useState } from 'react';
 
-import { useHistory, useLocation } from 'react-router-dom';
-
 import SearchBar from '../SearchBar';
 import Avatar from '../Common/Avatar';
 import ToggleSwitch from '../ToggleSwitch';
 import Button from '../Common/Button';
 import { HeaderContainer, HeaderSection } from './Header.styled';
-import { useVideoContext } from '../../providers/Video';
 
 const Header = () => {
-  const { pathname } = useLocation();
-  const history = useHistory();
-
-  const {
-    dispatch,
-    actions: { handleSearchVideos },
-  } = useVideoContext();
-
-  const [keyword, setKeyword] = useState('');
   const [isCheck, setCheck] = useState(false);
-
-  const handleToggle = (e) => {
-    setCheck(e.target.checked);
-  };
-
-  const handleOnChange = (e) => setKeyword(e.target.value);
-
-  const handleKeyPress = (e) => {
-    if (e.key === 'Enter') {
-      handleSearchVideos(keyword)(dispatch);
-
-      return pathname.length > 1 && history.push('/');
-    }
-  };
 
   return (
     <HeaderContainer>
@@ -55,17 +29,20 @@ const Header = () => {
             />
           </svg>
         </Button>
-        <SearchBar value={keyword} onChange={handleOnChange} onKeyDown={handleKeyPress} />
+        <SearchBar />
       </HeaderSection>
       <HeaderSection>
         <div style={{ marginRight: '1rem' }}>
           <ToggleSwitch
             toggleName="theme-toggle-switch"
             checked={isCheck}
-            onChange={handleToggle}
+            onChange={() => setCheck(!isCheck)}
           />
         </div>
-        <Avatar alt="avatar" />
+        <Avatar
+          src="https://images.unsplash.com/photo-1491528323818-fdd1faba62cc?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
+          alt="avatar"
+        />
       </HeaderSection>
     </HeaderContainer>
   );

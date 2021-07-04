@@ -1,21 +1,35 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import VideoItem from './GridVideoItem.component';
+import styled from '@emotion/styled';
+import VideoItem from './VideoItem';
 
-import Link from '../Common/Link';
+const GridVideoContainer = styled.div`
+  width: 100%;
+  overflow: auto;
+  display: grid;
+  grid-template-columns: repeat(1, 1fr);
+  gap: 2rem;
+  padding: 1rem;
 
-import { GridVideoContainer } from './GridVideo.styled';
+  @media (min-width: 576px) {
+    grid-template-columns: repeat(2, 1fr);
+    padding-left: 2rem;
+    padding-right: 2rem;
+  }
 
-const GridVideo = ({ videos, vertical }) => {
+  @media (min-width: 1024px) {
+    grid-template-columns: repeat(3, 1fr);
+    padding-left: 4rem;
+    padding-right: 4rem;
+  }
+`;
+
+const GridVideo = ({ videos }) => {
   return (
-    <GridVideoContainer vertical={vertical}>
+    <GridVideoContainer>
       {videos && videos.length > 0 ? (
-        videos.map((video) => (
-          <Link key={video.etag} to={`/watch?v=${video.id.videoId}`} role="link">
-            <VideoItem video={video} vertical={vertical} />
-          </Link>
-        ))
+        videos.map((item) => <VideoItem key={item.etag} video={item.snippet} />)
       ) : (
         <div>No result</div>
       )}
@@ -24,12 +38,7 @@ const GridVideo = ({ videos, vertical }) => {
 };
 
 GridVideo.propTypes = {
-  vertical: PropTypes.bool,
   videos: PropTypes.arrayOf(PropTypes.object).isRequired,
-};
-
-GridVideo.defaultProps = {
-  vertical: false,
 };
 
 export default GridVideo;

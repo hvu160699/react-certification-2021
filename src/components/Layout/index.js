@@ -1,1 +1,1 @@
-export { default, withPageLayout } from './Layout.component';
+export { default } from './Layout.component';
