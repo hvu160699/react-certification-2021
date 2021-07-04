@@ -1,0 +1,16 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Button Shoul render a button that can contain multiply element 1`] = `
+<button
+  className="css-oaqt4x"
+  type="button"
+>
+  <img
+    alt="img"
+    src={null}
+  />
+  <span>
+    Img button
+  </span>
+</button>
+`;

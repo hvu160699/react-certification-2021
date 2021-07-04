@@ -1,7 +1,5 @@
 import axios from 'axios';
-import { API_URL } from './constants';
-
-const baseURL = API_URL || '';
+import { API_URL as baseURL, API_KEY as key } from './constants';
 
 const $ = axios.create({
   baseURL,
@@ -11,6 +9,15 @@ const $ = axios.create({
     'Content-Type': 'application/json',
   },
 });
+
+$.interceptors.request.use(
+  (config) => {
+    const newConfig = { ...config, params: { key } };
+
+    return newConfig;
+  },
+  (error) => Promise.reject(error)
+);
 
 function get(parameters) {
   return new Promise((resolve, reject) => {

@@ -1,39 +1,13 @@
 import React from 'react';
-import styled from '@emotion/styled';
-import Input from '../Common/Input';
+import propTypes from 'prop-types';
 
-const SearchBarContainer = styled.div`
-  margin-left: 1rem;
-  position: relative;
-  display: none;
+import {
+  SearchBarContainer,
+  SearchIconWrapper,
+  SearchBarInput,
+} from './SearchBar.styled';
 
-  @media (min-width: 576px) {
-    display: block;
-  }
-`;
-
-const SearchIconWrapper = styled.div`
-  height: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 0 1rem;
-  position: absolute;
-  z-index: 10;
-
-  svg {
-    width: 1rem;
-    height: 1rem;
-    display: inline-block;
-    flex-shrink: 0;
-  }
-`;
-
-const SearchBarInput = styled(Input)`
-  padding-left: calc(1em + 32px);
-`;
-
-const SearchBar = () => {
+const SearchBar = ({ placeholder, value, onChange, onKeyDown }) => {
   return (
     <SearchBarContainer>
       <SearchIconWrapper>
@@ -51,9 +25,26 @@ const SearchBar = () => {
           />
         </svg>
       </SearchIconWrapper>
-      <SearchBarInput placeholder="Search..." />
+      <SearchBarInput
+        type="text"
+        placeholder={placeholder}
+        value={value}
+        onChange={onChange}
+        onKeyDown={onKeyDown}
+      />
     </SearchBarContainer>
   );
+};
+
+SearchBar.propTypes = {
+  placeholder: propTypes.string,
+  value: propTypes.string.isRequired,
+  onChange: propTypes.func.isRequired,
+  onKeyDown: propTypes.func.isRequired,
+};
+
+SearchBar.defaultProps = {
+  placeholder: 'Search...',
 };
 
 export default SearchBar;

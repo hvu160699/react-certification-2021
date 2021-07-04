@@ -1,37 +1,43 @@
-import React, { useEffect, useState } from 'react';
-
-import { $getVideos } from '../../api/videos';
+import React, { useEffect, useCallback } from 'react';
 
 import GridVideo from '../../components/GridVideo';
 import Container from '../../components/Common/Container';
+import { useVideoContext } from '../../providers/Video';
+import { withPageLayout } from '../../components/Layout';
+import Loading from '../../components/Common/Loading';
 
 const HomePage = () => {
-  const [videos, setVideo] = useState([]);
-  const [isLoading, setLoading] = useState(true);
+  const {
+    state,
+    dispatch,
+    actions: { fetchVideos },
+  } = useVideoContext();
 
-  const fetchVideos = async () => {
-    try {
-      const res = await $getVideos();
+  const handleFetchVideos = useCallback(async () => {
+    const queryData = {
+      q: state.q,
+      chart: 'mostPopular',
+      part: ['snippet'],
+      type: 'video',
+      maxResults: 5,
+    };
 
-      if (res.items) {
-        setVideo(res.items);
-      }
-    } catch (err) {
-      console.log(err);
-    } finally {
-      setLoading(false);
-    }
-  };
+    fetchVideos(queryData)(dispatch);
+  }, [state.q, dispatch, fetchVideos]);
 
   useEffect(() => {
-    fetchVideos();
-  }, []);
+    handleFetchVideos();
+  }, [handleFetchVideos]);
 
   return (
     <Container className="mx-auto">
-      {!isLoading && <GridVideo videos={videos} />}
+      {!state.isLoading ? (
+        state.videos && <GridVideo videos={state.videos} />
+      ) : (
+        <Loading />
+      )}
     </Container>
   );
 };
 
-export default HomePage;
+export default withPageLayout(HomePage);

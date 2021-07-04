@@ -1,0 +1,70 @@
+yarn run v1.22.4
+$ react-scripts test --coverage --watchAll
+------------------------------|----------|----------|----------|----------|-------------------|
+File                          |  % Stmts | % Branch |  % Funcs |  % Lines | Uncovered Line #s |
+------------------------------|----------|----------|----------|----------|-------------------|
+All files                     |    86.25 |    72.73 |    73.68 |    87.74 |                   |
+ components/App               |      100 |      100 |      100 |      100 |                   |
+  App.component.jsx           |      100 |      100 |      100 |      100 |                   |
+  index.js                    |        0 |        0 |        0 |        0 |                   |
+ components/Common/Avatar     |      100 |      100 |      100 |      100 |                   |
+  Avatar.component.jsx        |      100 |      100 |      100 |      100 |                   |
+  Avatar.styled.js            |      100 |      100 |      100 |      100 |                   |
+  index.js                    |        0 |        0 |        0 |        0 |                   |
+ components/Common/Button     |      100 |      100 |      100 |      100 |                   |
+  Button.component.jsx        |      100 |      100 |      100 |      100 |                   |
+  Button.styled.js            |      100 |      100 |      100 |      100 |                   |
+  index.js                    |        0 |        0 |        0 |        0 |                   |
+ components/Common/Container  |      100 |      100 |      100 |      100 |                   |
+  Container.component.jsx     |      100 |      100 |      100 |      100 |                   |
+  index.js                    |        0 |        0 |        0 |        0 |                   |
+ components/Common/Input      |      100 |      100 |      100 |      100 |                   |
+  Input.component.jsx         |      100 |      100 |      100 |      100 |                   |
+  Input.styled.js             |      100 |      100 |      100 |      100 |                   |
+  index.js                    |        0 |        0 |        0 |        0 |                   |
+ components/Common/Link       |      100 |      100 |      100 |      100 |                   |
+  Link.component.jsx          |        0 |        0 |        0 |        0 |                   |
+  Link.styled.js              |      100 |      100 |      100 |      100 |                   |
+  index.js                    |        0 |        0 |        0 |        0 |                   |
+ components/Common/Loading    |      100 |      100 |      100 |      100 |                   |
+  Loading.component.jsx       |      100 |      100 |      100 |      100 |                   |
+  Loading.styled.js           |      100 |      100 |      100 |      100 |                   |
+  index.js                    |        0 |        0 |        0 |        0 |                   |
+ components/GridVideo         |      100 |      100 |      100 |      100 |                   |
+  GridVideo.component.jsx     |      100 |      100 |      100 |      100 |                   |
+  GridVideo.styled.js         |      100 |      100 |      100 |      100 |                   |
+  GridVideoItem.component.jsx |      100 |      100 |      100 |      100 |                   |
+  index.js                    |        0 |        0 |        0 |        0 |                   |
+ components/Header            |    70.59 |        0 |       25 |       75 |                   |
+  Header.component.jsx        |    66.67 |        0 |       25 |    71.43 |       25,31,32,34 |
+  Header.styled.js            |      100 |      100 |      100 |      100 |                   |
+  index.js                    |        0 |        0 |        0 |        0 |                   |
+ components/Layout            |      100 |      100 |      100 |      100 |                   |
+  Layout.component.jsx        |      100 |      100 |      100 |      100 |                   |
+  Layout.styled.js            |      100 |      100 |      100 |      100 |                   |
+  index.js                    |        0 |        0 |        0 |        0 |                   |
+ components/SearchBar         |      100 |      100 |      100 |      100 |                   |
+  SearchBar.component.jsx     |      100 |      100 |      100 |      100 |                   |
+  SearchBar.styled.js         |      100 |      100 |      100 |      100 |                   |
+  index.js                    |        0 |        0 |        0 |        0 |                   |
+ components/ToggleSwitch      |      100 |       50 |      100 |      100 |                   |
+  ToggleSwitch.component.jsx  |      100 |       50 |      100 |      100 |                17 |
+  ToggleSwitch.styled.js      |      100 |      100 |      100 |      100 |                   |
+  index.js                    |        0 |        0 |        0 |        0 |                   |
+ components/VideoDetail       |      100 |      100 |      100 |      100 |                   |
+  VideoDetail.component.jsx   |      100 |      100 |      100 |      100 |                   |
+  VideoDetail.styled.js       |      100 |      100 |      100 |      100 |                   |
+  index.js                    |        0 |        0 |        0 |        0 |                   |
+ providers/App                |       75 |       60 |    66.67 |       75 |                   |
+  App.provider.js             |       60 |        0 |       50 |       60 |       15,17,18,21 |
+  App.reducer.js              |      100 |      100 |      100 |      100 |                   |
+  index.js                    |        0 |        0 |        0 |        0 |                   |
+ providers/Video              |     67.5 |    58.33 |    45.45 |    71.05 |                   |
+  Video.actions.js            |       40 |        0 |    28.57 |    44.44 |... 24,25,31,33,38 |
+  Video.provider.js           |       90 |       50 |    66.67 |       90 |                23 |
+  Video.reducer.js            |      100 |      100 |      100 |      100 |                   |
+  index.js                    |        0 |        0 |        0 |        0 |                   |
+------------------------------|----------|----------|----------|----------|-------------------|
+
+
+Done in 84.82s.
