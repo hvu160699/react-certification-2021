@@ -2,9 +2,10 @@ import React, { useEffect, useCallback } from 'react';
 
 import GridVideo from '../../components/GridVideo';
 import Container from '../../components/Common/Container';
+import Loading from '../../components/Common/Loading';
+
 import { useVideoContext } from '../../providers/Video';
 import { withPageLayout } from '../../components/Layout';
-import Loading from '../../components/Common/Loading';
 
 const HomePage = () => {
   const {
@@ -19,7 +20,7 @@ const HomePage = () => {
       chart: 'mostPopular',
       part: ['snippet'],
       type: 'video',
-      maxResults: 5,
+      maxResults: 1,
     };
 
     fetchVideos(queryData)(dispatch);
@@ -32,7 +33,7 @@ const HomePage = () => {
   return (
     <Container className="mx-auto">
       {!state.isLoading ? (
-        state.videos && <GridVideo videos={state.videos} />
+        state.videos && <GridVideo videos={state.videos} pathname="/watch" />
       ) : (
         <Loading />
       )}

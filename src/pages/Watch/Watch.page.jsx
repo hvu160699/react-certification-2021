@@ -1,5 +1,7 @@
 import React, { useCallback, useEffect, useMemo } from 'react';
-import { useLocation } from 'react-router';
+
+import { useLocation } from 'react-router-dom';
+import { useVideoContext } from '../../providers/Video';
 
 import Styled from './Watch.styled';
 import Loading from '../../components/Common/Loading';
@@ -7,8 +9,6 @@ import GridVideo from '../../components/GridVideo';
 import VideoDetail from '../../components/VideoDetail/VideoDetail.component';
 
 import { withPageLayout } from '../../components/Layout';
-
-import { useVideoContext } from '../../providers/Video';
 
 const WatchPage = () => {
   const { search } = useLocation();
@@ -52,7 +52,9 @@ const WatchPage = () => {
             {state.video && <VideoDetail video={state.video} videoId={videoId} />}
           </section>
           <section className="list-section">
-            {state.videos && <GridVideo videos={state.videos} vertical />}
+            {state.videos && (
+              <GridVideo videos={state.videos} vertical pathname="/watch" />
+            )}
           </section>
         </>
       ) : (

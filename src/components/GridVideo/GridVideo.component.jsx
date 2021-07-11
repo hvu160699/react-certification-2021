@@ -7,12 +7,12 @@ import Link from '../Common/Link';
 
 import { GridVideoContainer } from './GridVideo.styled';
 
-const GridVideo = ({ videos, vertical }) => {
+const GridVideo = ({ videos, vertical, pathname }) => {
   return (
     <GridVideoContainer vertical={vertical}>
       {videos && videos.length > 0 ? (
         videos.map((video) => (
-          <Link key={video.etag} to={`/watch?v=${video.id.videoId}`} role="link">
+          <Link key={video.etag} to={`${pathname}?v=${video.id.videoId}`} role="link">
             <VideoItem video={video} vertical={vertical} />
           </Link>
         ))
@@ -26,10 +26,12 @@ const GridVideo = ({ videos, vertical }) => {
 GridVideo.propTypes = {
   vertical: PropTypes.bool,
   videos: PropTypes.arrayOf(PropTypes.object).isRequired,
+  pathname: PropTypes.string,
 };
 
 GridVideo.defaultProps = {
   vertical: false,
+  pathname: '/watch',
 };
 
 export default GridVideo;

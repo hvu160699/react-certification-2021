@@ -1,4 +1,5 @@
 import React from 'react';
+import { useAppContext } from '../../providers/App';
 import Header from '../Header';
 import Styled from './Layout.styled';
 
@@ -15,9 +16,15 @@ export const withPageLayout = (Component) => {
 };
 
 const Layout = ({ children }) => {
+  const { state, actions } = useAppContext();
+
   return (
     <Styled.Main>
-      <Header />
+      <Header
+        isDarkMode={state.isDarkMode}
+        toggleTheme={actions.toggleTheme}
+        toggleSidebar={actions.toggleSidebar}
+      />
       {children}
     </Styled.Main>
   );

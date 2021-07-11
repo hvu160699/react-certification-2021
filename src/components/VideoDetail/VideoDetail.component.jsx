@@ -1,10 +1,12 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import Styled from './VideoDetail.styled';
 
 import { YOUTUBE_VIDEO_URL } from '../../utils/constants';
 import { appendHashTag, formatNumber, toDateString } from '../../utils/fns';
+import Button from '../Common/Button';
 
-const VideoDetail = ({ video, videoId }) => {
+const VideoDetail = ({ video, videoId, isAuthenticated, handleAddToFavorites }) => {
   const { snippet, statistics } = video;
 
   return (
@@ -22,6 +24,11 @@ const VideoDetail = ({ video, videoId }) => {
           </Styled.VideoTags>
         )}
         <h1>{snippet.title}</h1>
+        {isAuthenticated && (
+          <Button.PrimaryButton onClick={handleAddToFavorites}>
+            Add to Favorite
+          </Button.PrimaryButton>
+        )}
         <Styled.VideoStatistics>
           <span>{`${formatNumber(statistics.viewCount)} views`}</span>
           <span>-</span>
@@ -30,6 +37,25 @@ const VideoDetail = ({ video, videoId }) => {
       </Styled.VideoContent>
     </>
   );
+};
+
+VideoDetail.propTypes = {
+  video: PropTypes.objectOf(PropTypes.object()).isRequired,
+  videoId: PropTypes.number.isRequired,
+  isAuthenticated: PropTypes.bool,
+  handleAddToFavorites(props, propName) {
+    if (props.isAuthenticated && props[propName] === undefined) {
+      return new Error(
+        `Please provide an handleAddToFavorites function if isAuthenticated is true`
+      );
+    }
+    return PropTypes.func;
+  },
+};
+
+VideoDetail.defaultProps = {
+  isAuthenticated: false,
+  handleAddToFavorites: undefined,
 };
 
 export default VideoDetail;
