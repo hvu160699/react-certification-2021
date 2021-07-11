@@ -896,6 +896,13 @@ const ROUTES = [
 
 const YOUTUBE_VIDEO_URL = 'https://www.youtube.com/embed/';
 
+const MOCKED_USER = {
+  id: '123',
+  name: 'Wizeline',
+  avatarUrl:
+    'https://media.glassdoor.com/sqll/868055/wizeline-squarelogo-1473976610815.png',
+};
+
 export {
   AUTH_STORAGE_KEY,
   API_URL,
@@ -904,4 +911,5 @@ export {
   FAKE_VIDEOS_DATA,
   ROUTES,
   YOUTUBE_VIDEO_URL,
+  MOCKED_USER,
 };
