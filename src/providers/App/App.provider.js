@@ -1,12 +1,11 @@
 import React, { useContext, useReducer } from 'react';
 import reducer from './App.reducer';
+import actions from './App.actions';
+import useEnhancedActions from '../../utils/hooks/useEnhancedActions';
 
 const AppContextValue = {
-  videos: [],
-  isLoading: true,
   isSidebarOpen: false,
-  theme: 'light',
-  error: null,
+  isDarkMode: false,
 };
 
 const AppContext = React.createContext(AppContextValue);
@@ -23,9 +22,10 @@ const useAppContext = () => {
 
 const AppProvider = (props) => {
   const [state, dispatch] = useReducer(reducer, AppContextValue);
+  const { enhancedActions } = useEnhancedActions(actions, dispatch);
 
   return (
-    <AppContext.Provider value={{ state, dispatch }}>
+    <AppContext.Provider value={{ state, dispatch, actions: enhancedActions }}>
       {props.children}
     </AppContext.Provider>
   );
