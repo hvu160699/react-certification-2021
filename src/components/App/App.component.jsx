@@ -1,33 +1,45 @@
 import React from 'react';
-import { BrowserRouter, Switch, Route } from 'react-router-dom';
+import { Switch, Route, useLocation } from 'react-router-dom';
 
-import AppProvider from '../../providers/App';
-import VideoProvider from '../../providers/Video';
+import GlobalProvider from '../../providers/Global';
 
 import HomePage from '../../pages/Home';
 import WatchPage from '../../pages/Watch';
 
-import Layout from '../Layout';
+import AppLayout from '../Layout';
+import LoginPage from '../../pages/Login/Login.page';
+import FavoriteWatchPage from '../../pages/FavoriteWatch';
+import FavoritesPage from '../../pages/Favorites';
 
-function App() {
+const App = () => {
+  const location = useLocation();
+  const background = location.state && location.state.background;
+
   return (
-    <BrowserRouter>
-      <AppProvider>
-        <VideoProvider>
-          <Layout>
-            <Switch>
-              <Route exact path="/">
-                <HomePage />
-              </Route>
-              <Route exact path="/watch">
-                <WatchPage />
-              </Route>
-            </Switch>
-          </Layout>
-        </VideoProvider>
-      </AppProvider>
-    </BrowserRouter>
+    <GlobalProvider>
+      <AppLayout>
+        <Switch location={background || location}>
+          <Route exact path="/">
+            <HomePage />
+          </Route>
+          <Route path="/watch">
+            <WatchPage />
+          </Route>
+          <Route path="/favorites">
+            <FavoritesPage />
+          </Route>
+          <Route path="/favorites/watch">
+            <FavoriteWatchPage />
+          </Route>
+        </Switch>
+        {background && (
+          <Route path="/login">
+            <LoginPage />
+          </Route>
+        )}
+      </AppLayout>
+    </GlobalProvider>
   );
-}
+};
 
 export default App;
