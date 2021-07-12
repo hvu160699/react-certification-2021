@@ -4,7 +4,7 @@ import actions from './App.actions';
 import useEnhancedActions from '../../utils/hooks/useEnhancedActions';
 
 const AppContextValue = {
-  isSidebarOpen: false,
+  isSidebarOpen: true,
   isDarkMode: false,
 };
 

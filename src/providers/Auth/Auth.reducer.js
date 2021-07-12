@@ -7,6 +7,20 @@ const reducer = (state, action) => {
     case 'AUTH/LOG_OUT': {
       return { ...state, user: {}, isAuthenticated: false };
     }
+    case 'AUTH/ADD_TO_FAVORITES': {
+      const updatedVideos = [...state.favorites, payload];
+      return { ...state, favorites: updatedVideos };
+    }
+    case 'AUTH/REMOVE_FROM_FAVORITES': {
+      const updatedVideos = [...state.favorites].filter(
+        (video) => video.id.videoId !== payload
+      );
+
+      return { ...state, favorites: updatedVideos };
+    }
+    case 'AUTH/SELECT_VIDEO': {
+      return { ...state, video: payload };
+    }
     default: {
       return { ...state };
     }

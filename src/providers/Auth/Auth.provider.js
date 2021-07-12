@@ -7,6 +7,13 @@ import useEnhancedActions from '../../utils/hooks/useEnhancedActions';
 import { AUTH_STORAGE_KEY } from '../../utils/constants';
 import { storage } from '../../utils/storage';
 
+const AuthContextValue = {
+  isAuthenticated: false,
+  user: {},
+  favorites: [],
+  video: undefined,
+};
+
 const AuthContext = React.createContext();
 
 const useAuthContext = () => {
@@ -21,7 +28,7 @@ const AuthProvider = (props) => {
   const [state, dispatch] = useReducer(
     reducer,
     {},
-    () => storage.get(AUTH_STORAGE_KEY) || { isAuthenticated: false, user: {} }
+    () => storage.get(AUTH_STORAGE_KEY) || AuthContextValue
   );
   const { enhancedActions } = useEnhancedActions(actions, dispatch);
 

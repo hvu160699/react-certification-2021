@@ -14,14 +14,28 @@ const handleLogin = (username, password) => (dispatch) => {
 };
 
 const handleLogout = () => (dispatch) => {
-  storage.clear();
+  return new Promise((resolve) => {
+    setTimeout(() => {
+      storage.clear();
 
-  dispatch({ type: 'AUTH/LOG_OUT' });
+      dispatch({ type: 'AUTH/LOG_OUT' });
+
+      return resolve(true);
+    }, 250);
+  });
 };
+
+const handleAddToFavorites = (video) => (dispatch) =>
+  dispatch({ type: 'AUTH/ADD_TO_FAVORITES', payload: video });
+
+const handleRemoveFromFavorites = (videoId) => (dispatch) =>
+  dispatch({ type: 'AUTH/REMOVE_FROM_FAVORITES', payload: videoId });
 
 const actions = {
   handleLogin,
   handleLogout,
+  handleAddToFavorites,
+  handleRemoveFromFavorites,
 };
 
 export default actions;
