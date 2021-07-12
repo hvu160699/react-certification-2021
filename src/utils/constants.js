@@ -881,19 +881,6 @@ const FAKE_VIDEOS_DATA = [
   },
 ];
 
-const ROUTES = [
-  {
-    exact: true,
-    pageName: 'Home',
-    path: '/',
-  },
-  {
-    exact: true,
-    pageName: 'Watch',
-    path: '/watch',
-  },
-];
-
 const YOUTUBE_VIDEO_URL = 'https://www.youtube.com/embed/';
 
 const MOCKED_USER = {
@@ -903,13 +890,56 @@ const MOCKED_USER = {
     'https://media.glassdoor.com/sqll/868055/wizeline-squarelogo-1473976610815.png',
 };
 
+const SIDEBAR_MENU = [
+  {
+    name: 'Home',
+    to: '/',
+    icon: 'home',
+    private: false,
+  },
+  {
+    name: 'Favorites',
+    to: '/favorites',
+    icon: 'heart',
+    private: true,
+  },
+];
+
+const ROUTES_PATH = [
+  {
+    name: 'Home',
+    path: '/',
+    exact: true,
+    isPrivate: false,
+  },
+  {
+    name: 'Watch',
+    path: '/watch',
+    exact: false,
+    isPrivate: false,
+  },
+  {
+    name: 'Favorites',
+    path: '/favorites',
+    exact: true,
+    isPrivate: true,
+  },
+  {
+    name: 'FavoriteWatch',
+    path: '/favorites/watch',
+    exact: false,
+    isPrivate: true,
+  },
+];
+
 export {
   AUTH_STORAGE_KEY,
   API_URL,
   API_KEY,
   DEFAULT_AVATAR,
   FAKE_VIDEOS_DATA,
-  ROUTES,
   YOUTUBE_VIDEO_URL,
   MOCKED_USER,
+  ROUTES_PATH,
+  SIDEBAR_MENU,
 };
