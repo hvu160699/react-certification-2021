@@ -19,7 +19,7 @@ const LoginPage = () => {
     password: '',
   });
 
-  const onClose = () => history.goBack();
+  const onClose = () => history.push('/');
 
   const handleSubmit = async () => {
     try {

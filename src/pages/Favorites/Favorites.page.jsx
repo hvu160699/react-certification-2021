@@ -4,18 +4,18 @@ import GridVideo from '../../components/GridVideo';
 import Container from '../../components/Common/Container';
 import Loading from '../../components/Common/Loading';
 
-import { useVideoContext } from '../../providers/Video';
 import { withPageLayout } from '../../components/Layout';
+import { useAuthContext } from '../../providers/Auth';
 
 const FavoritesPage = () => {
   const {
-    authState: { videos, isLoading },
-  } = useVideoContext();
+    authState: { favorites, isLoading },
+  } = useAuthContext();
 
   return (
     <Container className="mx-auto">
       {!isLoading ? (
-        videos && <GridVideo videos={videos} pathname="/favorites/watch" />
+        favorites && <GridVideo videos={favorites} pathname="/favorites/watch" />
       ) : (
         <Loading />
       )}

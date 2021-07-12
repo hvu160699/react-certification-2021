@@ -6,7 +6,13 @@ import { YOUTUBE_VIDEO_URL } from '../../utils/constants';
 import { appendHashTag, formatNumber, toDateString } from '../../utils/fns';
 import Button from '../Common/Button';
 
-const VideoDetail = ({ video, videoId, isAuthenticated, handleAddToFavorites }) => {
+const VideoDetail = ({
+  video,
+  videoId,
+  isAuthenticated,
+  isFavorVideo,
+  handleFavoriteVideo,
+}) => {
   const { snippet, statistics } = video;
 
   return (
@@ -25,8 +31,8 @@ const VideoDetail = ({ video, videoId, isAuthenticated, handleAddToFavorites }) 
         )}
         <h1>{snippet.title}</h1>
         {isAuthenticated && (
-          <Button.PrimaryButton onClick={handleAddToFavorites}>
-            Add to Favorite
+          <Button.PrimaryButton onClick={handleFavoriteVideo}>
+            {isFavorVideo ? 'Remove from Favorites' : 'Add to Favorites'}
           </Button.PrimaryButton>
         )}
         <Styled.VideoStatistics>
@@ -40,13 +46,19 @@ const VideoDetail = ({ video, videoId, isAuthenticated, handleAddToFavorites }) 
 };
 
 VideoDetail.propTypes = {
-  video: PropTypes.objectOf(PropTypes.object()).isRequired,
+  video: PropTypes.shape(PropTypes.object).isRequired,
   videoId: PropTypes.number.isRequired,
   isAuthenticated: PropTypes.bool,
-  handleAddToFavorites(props, propName) {
+  isFavorVideo(props, propName) {
+    if (props.isAuthenticated && props[propName] === undefined) {
+      return new Error(`Please provide an isFavorVideo value if isAuthenticated is true`);
+    }
+    return PropTypes.bool;
+  },
+  handleFavoriteVideo(props, propName) {
     if (props.isAuthenticated && props[propName] === undefined) {
       return new Error(
-        `Please provide an handleAddToFavorites function if isAuthenticated is true`
+        `Please provide an handleFavoriteVideo function if isAuthenticated is true`
       );
     }
     return PropTypes.func;
@@ -55,7 +67,8 @@ VideoDetail.propTypes = {
 
 VideoDetail.defaultProps = {
   isAuthenticated: false,
-  handleAddToFavorites: undefined,
+  isFavorVideo: false,
+  handleFavoriteVideo: undefined,
 };
 
 export default VideoDetail;

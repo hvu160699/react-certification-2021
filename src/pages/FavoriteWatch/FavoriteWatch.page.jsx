@@ -1,4 +1,4 @@
-import React, { useMemo } from 'react';
+import React, { useCallback, useMemo } from 'react';
 
 import { useLocation } from 'react-router-dom';
 import { useAuthContext } from '../../providers/Auth';
@@ -14,8 +14,8 @@ const FavoriteWatch = () => {
   const { search } = useLocation();
 
   const {
-    authState: { videos, video, isLoading },
-    authActions: { handleAddToFavorites },
+    authState: { favorites, video, isLoading, isAuthenticated },
+    authActions: { handleAddToFavorites, handleRemoveFromFavorites },
   } = useAuthContext();
 
   const videoId = useMemo(() => {
@@ -23,6 +23,23 @@ const FavoriteWatch = () => {
 
     return id;
   }, [search]);
+
+  const isFavorVideo = useMemo(() => {
+    if (isAuthenticated) {
+      return favorites ? favorites.some((v) => v.id.videoId === video.id.videoId) : false;
+    }
+    return false;
+  }, [isAuthenticated, favorites, video]);
+
+  const handleFavoriteVideo = useCallback(
+    (data) => {
+      if (isFavorVideo) {
+        return handleRemoveFromFavorites(data.id.videoId);
+      }
+      return handleAddToFavorites(data);
+    },
+    [isFavorVideo, handleAddToFavorites, handleRemoveFromFavorites]
+  );
 
   return (
     <Styled.WatchPageContainer>
@@ -33,13 +50,16 @@ const FavoriteWatch = () => {
               <VideoDetail
                 video={video}
                 videoId={videoId}
-                isAuthenticated
-                handleAddToFavorites={handleAddToFavorites}
+                isAuthenticated={isAuthenticated}
+                isFavorVideo={isFavorVideo}
+                handleFavoriteVideo={handleFavoriteVideo}
               />
             )}
           </section>
           <section className="list-section">
-            {videos && <GridVideo videos={videos} pathname="/favorite/watch" vertical />}
+            {favorites && (
+              <GridVideo videos={favorites} pathname="/favorite/watch" vertical />
+            )}
           </section>
         </>
       ) : (
