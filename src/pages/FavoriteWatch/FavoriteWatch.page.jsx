@@ -9,14 +9,21 @@ import GridVideo from '../../components/GridVideo';
 import VideoDetail from '../../components/VideoDetail/VideoDetail.component';
 
 import { withPageLayout } from '../../components/Layout';
+import { useVideoContext } from '../../providers/Video';
 
 const FavoriteWatch = () => {
   const { search } = useLocation();
 
   const {
-    authState: { favorites, video, isLoading, isAuthenticated },
+    authState: { favorites, isAuthenticated },
     authActions: { handleAddToFavorites, handleRemoveFromFavorites },
   } = useAuthContext();
+
+  const {
+    state: { video, isLoading },
+    dispatch,
+    actions: { fetchVideoDetail },
+  } = useVideoContext();
 
   const videoId = useMemo(() => {
     const id = search.replace('?v=', '');
@@ -40,6 +47,26 @@ const FavoriteWatch = () => {
     },
     [isFavorVideo, handleAddToFavorites, handleRemoveFromFavorites]
   );
+
+  const handleFetchVideoDetail = useCallback(async () => {
+    const querySingle = {
+      part: ['snippet', 'contentDetails', 'statistics'],
+      id: videoId,
+      type: 'video',
+    };
+
+    const queryList = {
+      part: ['snippet'],
+      type: 'video',
+      relatedToVideoId: videoId,
+    };
+
+    fetchVideoDetail(querySingle, queryList)(dispatch);
+  }, [videoId, dispatch, fetchVideoDetail]);
+
+  useEffect(() => {
+    handleFetchVideoDetail();
+  }, [handleFetchVideoDetail]);
 
   return (
     <Styled.WatchPageContainer>
