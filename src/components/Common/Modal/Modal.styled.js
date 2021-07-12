@@ -16,6 +16,7 @@ const ModalOverlay = styled.div`
   pointer-events: auto;`
       : `opacity: 0;
   pointer-events: none;`}
+  z-index: 60;
 `;
 
 const ModalDialog = styled.div`

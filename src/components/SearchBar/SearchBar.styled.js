@@ -3,13 +3,8 @@ import styled from '@emotion/styled';
 import Input from '../Common/Input';
 
 const SearchBarContainer = styled.div`
-  margin-left: 1rem;
   position: relative;
-  display: none;
-
-  @media (min-width: 576px) {
-    display: block;
-  }
+  display: block;
 `;
 
 const SearchIconWrapper = styled.div`
@@ -31,6 +26,8 @@ const SearchIconWrapper = styled.div`
 
 const SearchBarInput = styled(Input)`
   padding-left: calc(1em + 32px);
+  min-width: 100%;
+  max-width: 100%;
 `;
 
 SearchBarContainer.displayName = 'SearchBarContainer';

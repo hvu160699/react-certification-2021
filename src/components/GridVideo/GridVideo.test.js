@@ -38,7 +38,7 @@ describe('Grid Video test suit', () => {
 
       expect(wrapper).toHaveStyleRule(
         'grid-template-columns',
-        'repeat(2, minmax(0, 1fr))'
+        'repeat(1, minmax(0, 1fr))'
       );
       expect(wrapper).toHaveStyleRule('gap', '1rem');
     });

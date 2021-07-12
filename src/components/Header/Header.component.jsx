@@ -9,7 +9,7 @@ import Avatar from '../Common/Avatar';
 import ToggleSwitch from '../ToggleSwitch';
 import Button from '../Common/Button';
 
-import { HeaderContainer, HeaderSection } from './Header.styled';
+import Styled from './Header.styled';
 import { useAuthContext } from '../../providers/Auth';
 
 const Header = ({ isDarkMode, toggleTheme, toggleSidebar }) => {
@@ -38,8 +38,8 @@ const Header = ({ isDarkMode, toggleTheme, toggleSidebar }) => {
   };
 
   return (
-    <HeaderContainer>
-      <HeaderSection>
+    <Styled.HeaderContainer>
+      <Styled.Section>
         <Button.LightButton onClick={toggleSidebar}>
           <span className="sr-only">Open aside menu</span>
           <svg
@@ -58,15 +58,13 @@ const Header = ({ isDarkMode, toggleTheme, toggleSidebar }) => {
           </svg>
         </Button.LightButton>
         <SearchBar value={keyword} onChange={handleOnChange} onKeyDown={handleKeyPress} />
-      </HeaderSection>
-      <HeaderSection>
-        <div style={{ marginRight: '1rem' }}>
-          <ToggleSwitch
-            toggleName="theme-toggle-switch"
-            checked={isDarkMode}
-            onChange={toggleTheme}
-          />
-        </div>
+      </Styled.Section>
+      <Styled.RightSection>
+        <ToggleSwitch
+          toggleName="theme-toggle-switch"
+          checked={isDarkMode}
+          onChange={toggleTheme}
+        />
         {isAuthenticated ? (
           <Avatar src={user.avatarUrl} alt="avatar" />
         ) : (
@@ -79,8 +77,8 @@ const Header = ({ isDarkMode, toggleTheme, toggleSidebar }) => {
             <Avatar alt="avatar" />
           </Link>
         )}
-      </HeaderSection>
-    </HeaderContainer>
+      </Styled.RightSection>
+    </Styled.HeaderContainer>
   );
 };
 

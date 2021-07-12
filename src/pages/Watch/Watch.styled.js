@@ -4,18 +4,12 @@ import Container from '../../components/Common/Container';
 const WatchPageContainer = styled(Container)`
   margin-left: auto;
   margin-right: auto;
-  display: grid;
+  display: flex;
+  flex-direction: column;
   gap: 1rem;
 
-  .watch-section {
-    grid-column: 1 / -1;
-  }
-
-  .list-section {
-    grid-column: 1 / -1;
-  }
-
   @media (min-width: 1024px) {
+    display: grid;
     grid-template-columns: repeat(12, minmax(0, 1fr));
 
     .watch-section {

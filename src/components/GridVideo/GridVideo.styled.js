@@ -8,16 +8,21 @@ const GridVideoContainer = styled.div`
       ? `grid-template-columns: repeat(1, minmax(0, 1fr));
          gap: 1rem 0;
         `
-      : `grid-template-columns: repeat(2, minmax(0, 1fr));
+      : `grid-template-columns: repeat(1, minmax(0, 1fr));
         gap: 1rem;
       `}
 
-  @media (min-width: 640px) {
+  @media (min-width: 768px) {
+    grid-template-columns: ${(props) =>
+      props.vertical ? 'auto' : 'repeat(2, minmax(0, 1fr))'};
+  }
+
+  @media (min-width: 1024px) {
     grid-template-columns: ${(props) =>
       props.vertical ? 'auto' : 'repeat(3, minmax(0, 1fr))'};
   }
 
-  @media (min-width: 1024px) {
+  @media (min-width: 1440px) {
     grid-template-columns: ${(props) =>
       props.vertical ? 'auto' : 'repeat(4, minmax(0, 1fr))'};
   }

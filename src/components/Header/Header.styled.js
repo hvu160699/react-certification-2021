@@ -9,22 +9,36 @@ const HeaderContainer = styled.header`
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
-
-  @media (min-width: 576px) {
-    padding-left: 2rem;
-    padding-right: 2rem;
-  }
-
-  @media (min-width: 1024px) {
-    padding-left: 4rem;
-    padding-right: 4rem;
-  }
+  position: fixed;
+  z-index: 50;
+  left: 0;
+  right: 0;
 `;
 
-const HeaderSection = styled.div`
+const Section = styled.div`
+  width: 100%;
   display: flex;
   flex-direction: row;
   align-items: center;
+  gap: 1rem;
 `;
 
-export { HeaderContainer, HeaderSection };
+const RightSection = styled(Section)`
+  display: none;
+
+  @media (min-width: 768px) {
+    display: flex;
+    justify-content: flex-end;
+  }
+`;
+
+const SearchBarSection = styled.div``;
+
+const Styled = {
+  HeaderContainer,
+  Section,
+  RightSection,
+  SearchBarSection,
+};
+
+export default Styled;
