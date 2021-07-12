@@ -1,7 +1,13 @@
 import styled from '@emotion/styled';
 
 const Main = styled.div`
-  height: 100%;
+  min-height: 100%;
+  display: flex;
+  padding-top: 4rem;
+`;
+
+const Wrapper = styled.div`
+  flex: 1;
 `;
 
 const Page = styled(Main)`
@@ -13,7 +19,7 @@ const Page = styled(Main)`
   }
 
   @media (min-width: 1280px) {
-    padding: 1.5rem 0;
+    padding: 1.5rem;
   }
 `;
 
@@ -23,6 +29,7 @@ Page.displayName = 'PageLayout';
 const Styled = {
   Main,
   Page,
+  Wrapper,
 };
 
 export default Styled;
