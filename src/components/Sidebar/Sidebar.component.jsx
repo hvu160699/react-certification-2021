@@ -40,12 +40,12 @@ const Sidebar = (props) => {
 Sidebar.propTypes = {
   isSidebarOpen: PropTypes.bool.isRequired,
   isAuthenticated: PropTypes.bool,
-  handleAuthentication: PropTypes.func
-}
+  handleAuthentication: PropTypes.func,
+};
 
 Sidebar.defaultProps = {
   isAuthenticated: false,
-  handleAuthentication: () => {}
-}
+  handleAuthentication: () => {},
+};
 
 export default Sidebar;

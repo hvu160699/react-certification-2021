@@ -50,7 +50,7 @@ VideoDetail.propTypes = {
   videoId: PropTypes.string.isRequired,
   isAuthenticated: PropTypes.bool,
   isFavorVideo: PropTypes.bool,
-  handleFavoriteVideo: PropTypes.func
+  handleFavoriteVideo: PropTypes.func,
 };
 
 VideoDetail.defaultProps = {

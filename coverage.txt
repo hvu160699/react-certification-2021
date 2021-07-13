@@ -1,9 +1,9 @@
-yarn run v1.22.4
+yarn run v1.22.5
 $ react-scripts test --coverage --watchAll
 ------------------------------|----------|----------|----------|----------|-------------------|
 File                          |  % Stmts | % Branch |  % Funcs |  % Lines | Uncovered Line #s |
 ------------------------------|----------|----------|----------|----------|-------------------|
-All files                     |    86.25 |    72.73 |    73.68 |    87.74 |                   |
+All files                     |    80.58 |    61.86 |    64.37 |    84.01 |                   |
  components/App               |      100 |      100 |      100 |      100 |                   |
   App.component.jsx           |      100 |      100 |      100 |      100 |                   |
   index.js                    |        0 |        0 |        0 |        0 |                   |
@@ -12,11 +12,15 @@ All files                     |    86.25 |    72.73 |    73.68 |    87.74 |     
   Avatar.styled.js            |      100 |      100 |      100 |      100 |                   |
   index.js                    |        0 |        0 |        0 |        0 |                   |
  components/Common/Button     |      100 |      100 |      100 |      100 |                   |
-  Button.component.jsx        |      100 |      100 |      100 |      100 |                   |
   Button.styled.js            |      100 |      100 |      100 |      100 |                   |
   index.js                    |        0 |        0 |        0 |        0 |                   |
  components/Common/Container  |      100 |      100 |      100 |      100 |                   |
-  Container.component.jsx     |      100 |      100 |      100 |      100 |                   |
+  Container.component.jsx     |        0 |        0 |        0 |        0 |                   |
+  Container.styled.js         |      100 |      100 |      100 |      100 |                   |
+  index.js                    |        0 |        0 |        0 |        0 |                   |
+ components/Common/Form       |        0 |      100 |      100 |        0 |                   |
+  Form.component.jsx          |        0 |        0 |        0 |        0 |                   |
+  Form.styled.js              |        0 |      100 |      100 |        0 |         3,9,13,18 |
   index.js                    |        0 |        0 |        0 |        0 |                   |
  components/Common/Input      |      100 |      100 |      100 |      100 |                   |
   Input.component.jsx         |      100 |      100 |      100 |      100 |                   |
@@ -30,41 +34,64 @@ All files                     |    86.25 |    72.73 |    73.68 |    87.74 |     
   Loading.component.jsx       |      100 |      100 |      100 |      100 |                   |
   Loading.styled.js           |      100 |      100 |      100 |      100 |                   |
   index.js                    |        0 |        0 |        0 |        0 |                   |
+ components/Common/Modal      |    89.66 |       80 |    71.43 |    92.86 |                   |
+  Modal.component.jsx         |       80 |       75 |    66.67 |    85.71 |             25,58 |
+  Modal.styled.js             |      100 |      100 |      100 |      100 |                   |
+  index.js                    |        0 |        0 |        0 |        0 |                   |
+ components/Common/NavLink    |      100 |      100 |      100 |      100 |                   |
+  NavLink.component.jsx       |        0 |        0 |        0 |        0 |                   |
+  NavLink.styled.js           |      100 |      100 |      100 |      100 |                   |
+  index.js                    |        0 |        0 |        0 |        0 |                   |
  components/GridVideo         |      100 |      100 |      100 |      100 |                   |
   GridVideo.component.jsx     |      100 |      100 |      100 |      100 |                   |
   GridVideo.styled.js         |      100 |      100 |      100 |      100 |                   |
   GridVideoItem.component.jsx |      100 |      100 |      100 |      100 |                   |
   index.js                    |        0 |        0 |        0 |        0 |                   |
- components/Header            |    70.59 |        0 |       25 |       75 |                   |
-  Header.component.jsx        |    66.67 |        0 |       25 |    71.43 |       25,31,32,34 |
+ components/Header            |    78.95 |    16.67 |       50 |    83.33 |                   |
+  Header.component.jsx        |    69.23 |    16.67 |    33.33 |       75 |          28,29,31 |
   Header.styled.js            |      100 |      100 |      100 |      100 |                   |
   index.js                    |        0 |        0 |        0 |        0 |                   |
- components/Layout            |      100 |      100 |      100 |      100 |                   |
-  Layout.component.jsx        |      100 |      100 |      100 |      100 |                   |
+ components/Layout            |    74.07 |    16.67 |       80 |    74.07 |                   |
+  Layout.component.jsx        |       65 |    16.67 |       75 |       65 |... 47,49,50,53,56 |
   Layout.styled.js            |      100 |      100 |      100 |      100 |                   |
   index.js                    |        0 |        0 |        0 |        0 |                   |
  components/SearchBar         |      100 |      100 |      100 |      100 |                   |
   SearchBar.component.jsx     |      100 |      100 |      100 |      100 |                   |
   SearchBar.styled.js         |      100 |      100 |      100 |      100 |                   |
   index.js                    |        0 |        0 |        0 |        0 |                   |
+ components/Sidebar           |      100 |     37.5 |    83.33 |      100 |                   |
+  Sidebar.component.jsx       |      100 |    35.71 |       75 |      100 | 19,24,29,30,32,34 |
+  Sidebar.styled.js           |      100 |       50 |      100 |      100 |                 6 |
+  index.js                    |        0 |        0 |        0 |        0 |                   |
  components/ToggleSwitch      |      100 |       50 |      100 |      100 |                   |
   ToggleSwitch.component.jsx  |      100 |       50 |      100 |      100 |                17 |
   ToggleSwitch.styled.js      |      100 |      100 |      100 |      100 |                   |
   index.js                    |        0 |        0 |        0 |        0 |                   |
- components/VideoDetail       |      100 |      100 |      100 |      100 |                   |
-  VideoDetail.component.jsx   |      100 |      100 |      100 |      100 |                   |
+ components/VideoDetail       |      100 |       50 |       50 |      100 |                   |
+  VideoDetail.component.jsx   |      100 |       50 |       50 |      100 |             39,41 |
   VideoDetail.styled.js       |      100 |      100 |      100 |      100 |                   |
   index.js                    |        0 |        0 |        0 |        0 |                   |
- providers/App                |       75 |       60 |    66.67 |       75 |                   |
-  App.provider.js             |       60 |        0 |       50 |       60 |       15,17,18,21 |
+ providers                    |        0 |        0 |        0 |        0 |                   |
+  index.js                    |        0 |        0 |        0 |        0 |                   |
+ providers/App                |    79.17 |       80 |    42.86 |       95 |                   |
+  App.actions.js              |    42.86 |      100 |        0 |      100 |                   |
+  App.provider.js             |    90.91 |       50 |      100 |    90.91 |                17 |
   App.reducer.js              |      100 |      100 |      100 |      100 |                   |
   index.js                    |        0 |        0 |        0 |        0 |                   |
- providers/Video              |     67.5 |    58.33 |    45.45 |    71.05 |                   |
-  Video.actions.js            |       40 |        0 |    28.57 |    44.44 |... 24,25,31,33,38 |
-  Video.provider.js           |       90 |       50 |    66.67 |       90 |                23 |
+ providers/Auth               |     61.7 |    61.54 |    33.33 |    69.05 |                   |
+  Auth.actions.js             |    22.73 |        0 |        0 |    27.78 |... 19,21,23,29,32 |
+  Auth.provider.js            |    92.31 |       75 |      100 |      100 |                15 |
+  Auth.reducer.js             |      100 |      100 |      100 |      100 |                   |
+  index.js                    |        0 |        0 |        0 |        0 |                   |
+ providers/Global             |      100 |      100 |      100 |      100 |                   |
+  Global.provider.js          |      100 |      100 |      100 |      100 |                   |
+  index.js                    |        0 |        0 |        0 |        0 |                   |
+ providers/Video              |    60.42 |    58.33 |    38.46 |    63.04 |                   |
+  Video.actions.js            |    33.33 |        0 |    22.22 |       36 |... 45,47,48,50,55 |
+  Video.provider.js           |    90.91 |       50 |    66.67 |    90.91 |                24 |
   Video.reducer.js            |      100 |      100 |      100 |      100 |                   |
   index.js                    |        0 |        0 |        0 |        0 |                   |
 ------------------------------|----------|----------|----------|----------|-------------------|
 
 
-Done in 84.82s.
+Done in 31.43s.
