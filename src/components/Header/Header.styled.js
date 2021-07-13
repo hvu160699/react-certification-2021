@@ -13,10 +13,12 @@ const HeaderContainer = styled.header`
   z-index: 50;
   left: 0;
   right: 0;
+  background-color: ${(props) => props.theme.mainLayoutBackground};
 `;
 
 const Section = styled.div`
   width: 100%;
+  height: 100%;
   display: flex;
   flex-direction: row;
   align-items: center;

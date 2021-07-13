@@ -6,10 +6,12 @@ const StyledLink = styled(NavLink)`
   padding: 1rem;
   text-decoration: none;
   transition: all 250ms linear;
+  color: ${(props) => props.theme.navLinkColor};
 
   &:hover,
   &.${(props) => props.activeClassName} {
-    background-color: rgba(229, 231, 235, 1);
+    background-color: #f2f2f2;
+    color: #212529;
   }
 
   &.${(props) => props.activeClassName} {
@@ -17,7 +19,7 @@ const StyledLink = styled(NavLink)`
   }
 
   &:visited {
-    color: unset;
+    color: ${(props) => props.theme.navLinkColor};
   }
 `;
 

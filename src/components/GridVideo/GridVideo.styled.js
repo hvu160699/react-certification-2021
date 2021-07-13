@@ -97,7 +97,7 @@ const GridVideoItem = styled.div`
         -webkit-box-orient: vertical;
         max-height: inherit;
         overflow: hidden;
-        color: #111827;
+        color: ${(props) => props.theme.videoTitleColor};
         text-overflow: ellipsis;
         white-space: normal;
         font-size: 0.875rem;
@@ -121,7 +121,7 @@ const GridVideoItem = styled.div`
         overflow: hidden;
 
         span {
-          color: gray;
+          color: ${(props) => props.theme.videoSubtitleColor};
           font-size: 0.75rem;
           line-height: 1rem;
           display: inline-block;

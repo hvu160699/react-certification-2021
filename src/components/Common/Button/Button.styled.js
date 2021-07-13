@@ -25,10 +25,11 @@ const PrimaryButton = styled(StyledButton)`
 `;
 
 const LightButton = styled(StyledButton)`
-  color: #212529;
-  background-color: #f8f9fa;
+  color: ${(props) => props.theme.lightButtonColor};
+  background-color: ${(props) => props.theme.lightButtonBackground};
 
   &:hover {
+    color: #212529;
     background-color: #e2e6ea;
   }
 `;

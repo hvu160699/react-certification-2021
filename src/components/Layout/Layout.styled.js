@@ -11,7 +11,7 @@ const Wrapper = styled.div`
 `;
 
 const Page = styled(Main)`
-  background: #f9f9f9;
+  background-color: ${(props) => props.theme.pageLayoutBackground};
   padding: 1rem 1.25rem;
 
   @media (min-width: 1024px) {

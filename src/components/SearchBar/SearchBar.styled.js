@@ -4,7 +4,17 @@ import Input from '../Common/Input';
 
 const SearchBarContainer = styled.div`
   position: relative;
-  display: block;
+  display: flex;
+  width: 100%;
+  align-items: center;
+  justify-content: center;
+`;
+
+const SearchBarWrapper = styled.div`
+  position: absolute;
+  display: inline-block;
+  left: 0;
+  right: 0;
 `;
 
 const SearchIconWrapper = styled.div`
@@ -34,4 +44,4 @@ SearchBarContainer.displayName = 'SearchBarContainer';
 SearchIconWrapper.displayName = 'SearchIcon';
 SearchBarInput.displayName = 'SearchInput';
 
-export { SearchBarContainer, SearchIconWrapper, SearchBarInput };
+export { SearchBarContainer, SearchIconWrapper, SearchBarWrapper, SearchBarInput };

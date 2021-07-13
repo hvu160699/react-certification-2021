@@ -14,9 +14,9 @@ describe('Grid Video test suit', () => {
   const RouterWrapper = (children) => <BrowserRouter>{children}</BrowserRouter>;
 
   describe('GridVideoContainer test case', () => {
-    it('Shoud render "No result" when passing an empty array', () => {
+    it('Shoud render "No videos found" when passing an empty array', () => {
       const gridVideo = shallow(<GridVideo videos={[]} handleSelect={onClickFn} />);
-      expect(gridVideo.text()).toEqual('No result');
+      expect(gridVideo.text()).toEqual('No videos found');
     });
 
     it('Should render <GridVideoItem /> without crashing', () => {
