@@ -1,6 +1,7 @@
 import React, { useContext, useReducer } from 'react';
 import reducer from './Video.reducer';
 import actions from './Video.actions';
+import useEnhancedActions from '../../utils/hooks/useEnhancedActions';
 
 const VideoContextValue = {
   video: undefined,
@@ -28,21 +29,10 @@ const useVideoContext = () => {
 
 const VideoProvider = (props) => {
   const [state, dispatch] = useReducer(reducer, VideoContextValue);
-  // const [enhancedActions, setEnhancedActions] = useState({});
-
-  // useEffect(() => {
-  //   Object.keys(actions).forEach((key) =>
-  //     setEnhancedActions((e) => ({
-  //       ...e,
-  //       [key]: (...args) => {
-  //         actions[key](...args)(dispatch);
-  //       },
-  //     }))
-  //   );
-  // }, []);
+  const { enhancedActions } = useEnhancedActions(actions, dispatch);
 
   return (
-    <VideoContext.Provider value={{ state, dispatch, actions }}>
+    <VideoContext.Provider value={{ state, actions: enhancedActions }}>
       {props.children}
     </VideoContext.Provider>
   );

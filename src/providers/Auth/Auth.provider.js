@@ -1,18 +1,11 @@
 import React, { useContext, useEffect, useReducer } from 'react';
-import reducer from './Auth.reducer';
+import reducer, { initialState } from './Auth.reducer';
 import actions from './Auth.actions';
 
 import useEnhancedActions from '../../utils/hooks/useEnhancedActions';
 
 import { AUTH_STORAGE_KEY } from '../../utils/constants';
 import { storage } from '../../utils/storage';
-
-const AuthContextValue = {
-  isAuthenticated: false,
-  user: {},
-  favorites: [],
-  video: undefined,
-};
 
 const AuthContext = React.createContext();
 
@@ -28,7 +21,7 @@ const AuthProvider = (props) => {
   const [state, dispatch] = useReducer(
     reducer,
     {},
-    () => storage.get(AUTH_STORAGE_KEY) || AuthContextValue
+    () => storage.get(AUTH_STORAGE_KEY) || initialState
   );
   const { enhancedActions } = useEnhancedActions(actions, dispatch);
 
@@ -37,7 +30,7 @@ const AuthProvider = (props) => {
   }, [state]);
 
   return (
-    <AuthContext.Provider value={{ authState: state, authActions: enhancedActions }}>
+    <AuthContext.Provider value={{ state, actions: enhancedActions }}>
       {props.children}
     </AuthContext.Provider>
   );

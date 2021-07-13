@@ -17,7 +17,7 @@ const fetchVideos = (queryData) => {
   };
 };
 
-const fetchVideoDetail = (querySingle, queryList) => {
+const fetchVideoDetailWithRelated = (querySingle, queryList) => {
   return async (dispatch) => {
     dispatch({ type: 'VIDEO/FETCH_PROCESSING' });
 
@@ -40,6 +40,28 @@ const fetchVideoDetail = (querySingle, queryList) => {
   };
 };
 
-const actions = { handleSearchVideos, fetchVideos, fetchVideoDetail };
+const fetchVideoDetail = (queryData) => {
+  return async (dispatch) => {
+    dispatch({ type: 'VIDEO/FETCH_PROCESSING' });
+
+    try {
+      const res = await $getVideoDetail(queryData);
+
+      dispatch({
+        type: 'VIDEO/FETCH_DETAIL_SUCCESS',
+        payload: { video: res.items[0] },
+      });
+    } catch (err) {
+      dispatch({ type: 'VIDEO/FETCH_FAILURE' });
+    }
+  };
+};
+
+const actions = {
+  handleSearchVideos,
+  fetchVideos,
+  fetchVideoDetailWithRelated,
+  fetchVideoDetail,
+};
 
 export default actions;

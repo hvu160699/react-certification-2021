@@ -932,6 +932,27 @@ const ROUTES_PATH = [
   },
 ];
 
+const THEME = {
+  light: {
+    mainLayoutBackground: '#FFFFFF',
+    pageLayoutBackground: '#f9f9f9',
+    videoTitleColor: '#111827',
+    videoSubtitleColor: 'gray',
+    navLinkColor: '#333333',
+    lightButtonColor: '#212529',
+    lightButtonBackground: '#f8f9fa',
+  },
+  dark: {
+    mainLayoutBackground: '#4D4D4D',
+    pageLayoutBackground: '#404040',
+    videoTitleColor: '#FFFFFF',
+    videoSubtitleColor: '#AAAAAA',
+    navLinkColor: '#FFFFFF',
+    lightButtonColor: '#FFFFFF',
+    lightButtonBackground: '#4D4D4D',
+  },
+};
+
 export {
   AUTH_STORAGE_KEY,
   API_URL,
@@ -942,4 +963,5 @@ export {
   MOCKED_USER,
   ROUTES_PATH,
   SIDEBAR_MENU,
+  THEME,
 };

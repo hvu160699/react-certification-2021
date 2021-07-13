@@ -1,3 +1,10 @@
+export const initialState = {
+  isAuthenticated: false,
+  user: {},
+  favorites: [],
+  video: undefined,
+};
+
 const reducer = (state, action) => {
   const { type, payload } = action;
   switch (type) {
@@ -5,7 +12,7 @@ const reducer = (state, action) => {
       return { ...state, user: { ...payload }, isAuthenticated: true };
     }
     case 'AUTH/LOG_OUT': {
-      return { ...state, user: {}, isAuthenticated: false };
+      return { ...initialState };
     }
     case 'AUTH/ADD_TO_FAVORITES': {
       const updatedVideos = [...state.favorites, payload];
