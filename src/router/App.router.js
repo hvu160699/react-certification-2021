@@ -1,7 +1,7 @@
 import React, { Suspense } from 'react';
 import { Switch, useLocation } from 'react-router-dom';
-import Router from './Router';
 
+import Router from './Router';
 import Loading from '../components/Common/Loading';
 
 import { ROUTES_PATH } from '../utils/constants';
@@ -17,11 +17,11 @@ const AppRouter = () => {
         {ROUTES_PATH.map((route) => (
           <Router key={route.name} component={loader(route.name)} {...route} />
         ))}
-        {background && (
-          <Router path="/login" component={loader('Login')} private={false} />
-        )}
-        <Router path="*" component={loader('Error')} private={false} />
+        <Router path="*" component={loader('Error')} isPrivate={false} />
       </Switch>
+      {background && (
+        <Router path="/login" component={loader('Login')} isPrivate={false} />
+      )}
     </Suspense>
   );
 };

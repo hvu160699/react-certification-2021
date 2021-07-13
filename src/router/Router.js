@@ -1,12 +1,11 @@
 import React from 'react';
-import { Route, useHistory, useLocation } from 'react-router-dom';
+import { Route, Redirect, useLocation } from 'react-router-dom';
 import { AUTH_STORAGE_KEY } from '../utils/constants';
 import { storage } from '../utils/storage';
 
 const Router = (props) => {
   const { component: Component, isPrivate, ...rest } = props;
   const location = useLocation();
-  const history = useHistory();
 
   const isAuthenticated = storage.get(AUTH_STORAGE_KEY)
     ? storage.get(AUTH_STORAGE_KEY).isAuthenticated
@@ -19,7 +18,7 @@ const Router = (props) => {
         isAuthenticated ? (
           <Component {...routeProps} />
         ) : (
-          history.push({ pathname: '/login', state: { background: location } })
+          <Redirect to={{ pathname: '/login', state: { background: location } }} />
         )
       }
     />
