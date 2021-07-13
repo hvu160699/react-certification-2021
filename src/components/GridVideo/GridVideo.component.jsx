@@ -17,7 +17,7 @@ const GridVideo = ({ videos, vertical, pathname }) => {
           </Link>
         ))
       ) : (
-        <div>No result</div>
+        <div>No videos found</div>
       )}
     </GridVideoContainer>
   );

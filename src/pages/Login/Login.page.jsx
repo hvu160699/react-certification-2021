@@ -1,6 +1,5 @@
 import React from 'react';
 
-import { useHistory } from 'react-router';
 import { useAuthContext } from '../../providers/Auth';
 
 import useForm from '../../utils/hooks/useForm';
@@ -8,10 +7,9 @@ import Modal from '../../components/Common/Modal';
 import Input from '../../components/Common/Input';
 import Button from '../../components/Common/Button';
 
-const LoginPage = () => {
-  const history = useHistory();
+const LoginPage = (props) => {
   const {
-    authActions: { handleLogin },
+    actions: { handleLogin },
   } = useAuthContext();
 
   const [form, onChangeForm] = useForm({
@@ -19,14 +17,14 @@ const LoginPage = () => {
     password: '',
   });
 
-  const onClose = () => history.push('/');
+  const onClose = () => props.history.goBack();
 
   const handleSubmit = async () => {
     try {
       const res = await handleLogin(form.userName, form.password);
 
       if (res) {
-        history.replace('/');
+        props.history.replace('/');
       }
     } catch (err) {
       console.log(err);

@@ -1,5 +1,5 @@
 import React from 'react';
-import PropTypes from 'prop-types';
+// import PropTypes from 'prop-types';
 import Styled from './VideoDetail.styled';
 
 import { YOUTUBE_VIDEO_URL } from '../../utils/constants';
@@ -30,45 +30,45 @@ const VideoDetail = ({
           </Styled.VideoTags>
         )}
         <h1>{snippet.title}</h1>
-        {isAuthenticated && (
-          <Button.PrimaryButton onClick={handleFavoriteVideo}>
-            {isFavorVideo ? 'Remove from Favorites' : 'Add to Favorites'}
-          </Button.PrimaryButton>
-        )}
         <Styled.VideoStatistics>
           <span>{`${formatNumber(statistics.viewCount)} views`}</span>
           <span>-</span>
           <span>{toDateString(snippet.publishedAt)}</span>
         </Styled.VideoStatistics>
       </Styled.VideoContent>
+      {isAuthenticated && (
+        <Button.PrimaryButton onClick={handleFavoriteVideo}>
+          {isFavorVideo ? 'Remove from Favorites' : 'Add to Favorites'}
+        </Button.PrimaryButton>
+      )}
     </>
   );
 };
 
-VideoDetail.propTypes = {
-  video: PropTypes.shape(PropTypes.object).isRequired,
-  videoId: PropTypes.number.isRequired,
-  isAuthenticated: PropTypes.bool,
-  isFavorVideo(props, propName) {
-    if (props.isAuthenticated && props[propName] === undefined) {
-      return new Error(`Please provide an isFavorVideo value if isAuthenticated is true`);
-    }
-    return PropTypes.bool;
-  },
-  handleFavoriteVideo(props, propName) {
-    if (props.isAuthenticated && props[propName] === undefined) {
-      return new Error(
-        `Please provide an handleFavoriteVideo function if isAuthenticated is true`
-      );
-    }
-    return PropTypes.func;
-  },
-};
+// VideoDetail.propTypes = {
+//   video: PropTypes.objectOf(PropTypes.any).isRequired,
+//   videoId: PropTypes.string.isRequired,
+//   isAuthenticated: PropTypes.bool,
+//   isFavorVideo: function (props, propName) {
+//     if (props.isAuthenticated && props[propName] === undefined) {
+//       return new Error(`Please provide an isFavorVideo value if isAuthenticated is true`);
+//     }
+//     return props[propName]
+//   },
+//   handleFavoriteVideo: function (props, propName) {
+//     if (props.isAuthenticated && props[propName] === undefined) {
+//       return new Error(
+//         `Please provide an handleFavoriteVideo function if isAuthenticated is true`
+//       );
+//     }
+//     return PropTypes.func
+//   },
+// };
 
-VideoDetail.defaultProps = {
-  isAuthenticated: false,
-  isFavorVideo: false,
-  handleFavoriteVideo: undefined,
-};
+// VideoDetail.defaultProps = {
+//   isAuthenticated: false,
+//   isFavorVideo: false,
+//   handleFavoriteVideo: () => void {},
+// };
 
 export default VideoDetail;

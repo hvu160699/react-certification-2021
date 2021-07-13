@@ -10,7 +10,6 @@ import { withPageLayout } from '../../components/Layout';
 const HomePage = () => {
   const {
     state,
-    dispatch,
     actions: { fetchVideos },
   } = useVideoContext();
 
@@ -23,8 +22,8 @@ const HomePage = () => {
       maxResults: 1,
     };
 
-    fetchVideos(queryData)(dispatch);
-  }, [state.q, dispatch, fetchVideos]);
+    fetchVideos(queryData);
+  }, [state.q, fetchVideos]);
 
   useEffect(() => {
     handleFetchVideos();

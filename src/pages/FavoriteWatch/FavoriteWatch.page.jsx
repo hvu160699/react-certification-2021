@@ -1,4 +1,4 @@
-import React, { useCallback, useMemo } from 'react';
+import React, { useEffect, useCallback, useMemo } from 'react';
 
 import { useLocation } from 'react-router-dom';
 import { useAuthContext } from '../../providers/Auth';
@@ -13,17 +13,15 @@ import { useVideoContext } from '../../providers/Video';
 
 const FavoriteWatch = () => {
   const { search } = useLocation();
-
-  const {
-    authState: { favorites, isAuthenticated },
-    authActions: { handleAddToFavorites, handleRemoveFromFavorites },
-  } = useAuthContext();
-
   const {
     state: { video, isLoading },
-    dispatch,
     actions: { fetchVideoDetail },
   } = useVideoContext();
+
+  const {
+    state: { favorites, isAuthenticated },
+    actions: { handleAddToFavorites, handleRemoveFromFavorites },
+  } = useAuthContext();
 
   const videoId = useMemo(() => {
     const id = search.replace('?v=', '');
@@ -31,42 +29,36 @@ const FavoriteWatch = () => {
     return id;
   }, [search]);
 
-  const isFavorVideo = useMemo(() => {
-    if (isAuthenticated) {
-      return favorites ? favorites.some((v) => v.id.videoId === video.id.videoId) : false;
-    }
-    return false;
-  }, [isAuthenticated, favorites, video]);
-
-  const handleFavoriteVideo = useCallback(
-    (data) => {
-      if (isFavorVideo) {
-        return handleRemoveFromFavorites(data.id.videoId);
-      }
-      return handleAddToFavorites(data);
-    },
-    [isFavorVideo, handleAddToFavorites, handleRemoveFromFavorites]
-  );
-
   const handleFetchVideoDetail = useCallback(async () => {
-    const querySingle = {
+    const queryData = {
       part: ['snippet', 'contentDetails', 'statistics'],
       id: videoId,
       type: 'video',
     };
 
-    const queryList = {
-      part: ['snippet'],
-      type: 'video',
-      relatedToVideoId: videoId,
-    };
-
-    fetchVideoDetail(querySingle, queryList)(dispatch);
-  }, [videoId, dispatch, fetchVideoDetail]);
+    fetchVideoDetail(queryData);
+  }, [videoId, fetchVideoDetail]);
 
   useEffect(() => {
     handleFetchVideoDetail();
   }, [handleFetchVideoDetail]);
+
+  const isFavorVideo = useMemo(() => {
+    if (isAuthenticated) {
+      return favorites && favorites.length > 0
+        ? favorites.some((v) => v.id.videoId === videoId)
+        : false;
+    }
+    return false;
+  }, [isAuthenticated, videoId, favorites]);
+
+  const handleFavoriteVideo = () => {
+    if (isFavorVideo) {
+      return handleRemoveFromFavorites(videoId);
+    }
+    const data = { ...video, id: { videoId } };
+    return handleAddToFavorites(data);
+  };
 
   return (
     <Styled.WatchPageContainer>
@@ -84,9 +76,7 @@ const FavoriteWatch = () => {
             )}
           </section>
           <section className="list-section">
-            {favorites && (
-              <GridVideo videos={favorites} pathname="/favorite/watch" vertical />
-            )}
+            <GridVideo videos={favorites} pathname="/favorite/watch" vertical />
           </section>
         </>
       ) : (

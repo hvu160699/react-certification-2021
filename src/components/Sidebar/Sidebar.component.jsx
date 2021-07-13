@@ -5,7 +5,7 @@ import Styled from './Sidebar.styled';
 import { SIDEBAR_MENU } from '../../utils/constants';
 
 const Sidebar = (props) => {
-  const { isSidebarOpen, isAuthenticated, handleLogout } = props;
+  const { isSidebarOpen, isAuthenticated, handleAuthentication } = props;
   return (
     <Styled.AsideContainer isSidebarOpen={isSidebarOpen}>
       <Styled.AsideMenu>
@@ -14,31 +14,25 @@ const Sidebar = (props) => {
             key={item.name}
             to={item.to}
             activeClassName="link-active"
-            isSidebarOpen={isSidebarOpen}
+            isActive={(_, location) => location.pathname === item.to}
           >
             {isSidebarOpen ? (
               <i className={`fa fa-sm fa-${item.icon}`} />
             ) : (
-              <span>
-                <i className={`fa fa-sm fa-${item.icon}`} />
-                {item.name}
-              </span>
+              <i className={`fa fa-sm fa-${item.icon}`} />
             )}
+            {!isSidebarOpen && <span>{item.name}</span>}
           </Styled.AsideMenuLink>
         ))}
       </Styled.AsideMenu>
-      {isAuthenticated && (
-        <Styled.AsideFooter onClick={handleLogout} isSidebarOpen={isSidebarOpen}>
-          {isSidebarOpen ? (
-            <i className="fas fa-sm fa-sign-out-alt" />
-          ) : (
-            <span>
-              <i className="fas fa-sm fa-sign-out-alt" />
-              Logout
-            </span>
-          )}
-        </Styled.AsideFooter>
-      )}
+      <Styled.AsideFooter onClick={handleAuthentication}>
+        {isSidebarOpen ? (
+          <i className={`fas fa-sm fa-sign-${isAuthenticated ? 'out' : 'in'}-alt`} />
+        ) : (
+          <i className={`fas fa-sm fa-sign-${isAuthenticated ? 'out' : 'in'}-alt`} />
+        )}
+        {!isSidebarOpen && <span>{isAuthenticated ? 'Logout' : 'Login'}</span>}
+      </Styled.AsideFooter>
     </Styled.AsideContainer>
   );
 };

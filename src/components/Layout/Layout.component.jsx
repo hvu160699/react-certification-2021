@@ -1,10 +1,16 @@
 import React from 'react';
-import { useHistory } from 'react-router';
+import { ThemeProvider } from '@emotion/react';
+
+import { useHistory, useLocation } from 'react-router';
+
 import { useAppContext } from '../../providers/App';
 import { useAuthContext } from '../../providers/Auth';
+import { useVideoContext } from '../../providers/Video';
 import Header from '../Header';
 import Sidebar from '../Sidebar';
 import Styled from './Layout.styled';
+
+import { THEME } from '../../utils/constants';
 
 export const withPageLayout = (Component) => {
   return class PageLayout extends React.PureComponent {
@@ -20,41 +26,61 @@ export const withPageLayout = (Component) => {
 
 const Layout = ({ children }) => {
   const history = useHistory();
-  const { state, actions } = useAppContext();
+  const location = useLocation();
   const {
-    authState: { isAuthenticated },
-    authActions,
+    state: { isDarkMode, isSidebarOpen },
+    actions: { toggleSidebar, toggleTheme },
+  } = useAppContext();
+
+  const {
+    state: { isAuthenticated, user },
+    actions: { handleLogout },
   } = useAuthContext();
 
-  const handleLogout = async () => {
-    try {
-      const res = await authActions.handleLogout();
+  const {
+    actions: { handleSearchVideos },
+  } = useVideoContext();
 
-      if (res) {
-        history.replace('/');
+  const handleAuthentication = async () => {
+    if (isAuthenticated) {
+      try {
+        const res = await handleLogout();
+
+        if (res) {
+          history.replace('/');
+        }
+      } catch (err) {
+        console.log(err);
       }
-    } catch (err) {
-      console.log(err);
+    } else {
+      history.push({ pathname: '/login', state: { background: location } });
     }
   };
 
+  const headerProps = {
+    user,
+    isAuthenticated,
+    handleSearchVideos,
+    isDarkMode,
+    toggleTheme,
+    toggleSidebar,
+  };
+
+  const sidebarProps = {
+    isDarkMode,
+    isSidebarOpen,
+    isAuthenticated,
+    handleAuthentication,
+  };
+
   return (
-    <>
-      <Header
-        isDarkMode={state.isDarkMode}
-        toggleTheme={actions.toggleTheme}
-        toggleSidebar={actions.toggleSidebar}
-      />
+    <ThemeProvider theme={isDarkMode ? THEME.dark : THEME.light}>
+      <Header {...headerProps} />
       <Styled.Main>
-        <Sidebar
-          isAuthenticated={isAuthenticated}
-          isDarkMode={state.isDarkMode}
-          isSidebarOpen={state.isSidebarOpen}
-          handleLogout={handleLogout}
-        />
+        <Sidebar {...sidebarProps} />
         <Styled.Wrapper>{children}</Styled.Wrapper>
       </Styled.Main>
-    </>
+    </ThemeProvider>
   );
 };
 

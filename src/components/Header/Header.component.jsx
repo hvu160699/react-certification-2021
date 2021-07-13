@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 
 import { useHistory, useLocation, Link } from 'react-router-dom';
-import { useVideoContext } from '../../providers/Video';
 
 import SearchBar from '../SearchBar';
 import Avatar from '../Common/Avatar';
@@ -10,35 +9,31 @@ import ToggleSwitch from '../ToggleSwitch';
 import Button from '../Common/Button';
 
 import Styled from './Header.styled';
-import { useAuthContext } from '../../providers/Auth';
 
-const Header = ({ isDarkMode, toggleTheme, toggleSidebar }) => {
+const Header = ({
+  handleSearchVideos,
+  isAuthenticated,
+  user,
+  isDarkMode,
+  toggleTheme,
+  toggleSidebar,
+}) => {
   const history = useHistory();
   const location = useLocation();
-
   const [keyword, setKeyword] = useState('');
-
-  const {
-    dispatch,
-    actions: { handleSearchVideos },
-  } = useVideoContext();
-
-  const {
-    authState: { isAuthenticated, user },
-  } = useAuthContext();
 
   const handleOnChange = (e) => setKeyword(e.target.value);
 
   const handleKeyPress = (e) => {
     if (e.key === 'Enter') {
-      handleSearchVideos(keyword)(dispatch);
+      handleSearchVideos(keyword);
 
       return location.pathname.length > 1 && history.push('/');
     }
   };
 
   return (
-    <Styled.HeaderContainer>
+    <Styled.HeaderContainer isDarkMode={isDarkMode}>
       <Styled.Section>
         <Button.LightButton onClick={toggleSidebar}>
           <span className="sr-only">Open aside menu</span>
@@ -86,6 +81,14 @@ Header.propTypes = {
   isDarkMode: PropTypes.bool.isRequired,
   toggleTheme: PropTypes.func.isRequired,
   toggleSidebar: PropTypes.func.isRequired,
+  handleSearchVideos: PropTypes.func.isRequired,
+  isAuthenticated: PropTypes.bool,
+  user: PropTypes.objectOf(PropTypes.any),
+};
+
+Header.defaultProps = {
+  isAuthenticated: false,
+  user: undefined,
 };
 
 export default Header;

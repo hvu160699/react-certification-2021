@@ -9,14 +9,19 @@ import GridVideo from '../../components/GridVideo';
 import VideoDetail from '../../components/VideoDetail/VideoDetail.component';
 
 import { withPageLayout } from '../../components/Layout';
+import { useAuthContext } from '../../providers/Auth';
 
 const WatchPage = () => {
   const { search } = useLocation();
   const {
-    state,
-    dispatch,
-    actions: { fetchVideoDetail },
+    state: { video, videos, isLoading },
+    actions: { fetchVideoDetailWithRelated },
   } = useVideoContext();
+
+  const {
+    state: { favorites, isAuthenticated },
+    actions: { handleAddToFavorites, handleRemoveFromFavorites },
+  } = useAuthContext();
 
   const videoId = useMemo(() => {
     const id = search.replace('?v=', '');
@@ -35,26 +40,50 @@ const WatchPage = () => {
       part: ['snippet'],
       type: 'video',
       relatedToVideoId: videoId,
+      maxResults: 1,
     };
 
-    fetchVideoDetail(querySingle, queryList)(dispatch);
-  }, [videoId, dispatch, fetchVideoDetail]);
+    fetchVideoDetailWithRelated(querySingle, queryList);
+  }, [videoId, fetchVideoDetailWithRelated]);
 
   useEffect(() => {
     handleFetchVideoDetail();
   }, [handleFetchVideoDetail]);
 
+  const isFavorVideo = useMemo(() => {
+    if (isAuthenticated) {
+      return favorites && favorites.length > 0
+        ? favorites.some((v) => v.id.videoId === videoId)
+        : false;
+    }
+    return false;
+  }, [isAuthenticated, videoId, favorites]);
+
+  const handleFavoriteVideo = () => {
+    if (isFavorVideo) {
+      return handleRemoveFromFavorites(videoId);
+    }
+    const data = { ...video, id: { videoId } };
+    return handleAddToFavorites(data);
+  };
+
   return (
     <Styled.WatchPageContainer>
-      {!state.isLoading ? (
+      {!isLoading ? (
         <>
           <section className="watch-section">
-            {state.video && <VideoDetail video={state.video} videoId={videoId} />}
+            {video && (
+              <VideoDetail
+                video={video}
+                videoId={videoId}
+                isAuthenticated={isAuthenticated}
+                isFavorVideo={isFavorVideo}
+                handleFavoriteVideo={handleFavoriteVideo}
+              />
+            )}
           </section>
           <section className="list-section">
-            {state.videos && (
-              <GridVideo videos={state.videos} vertical pathname="/watch" />
-            )}
+            <GridVideo videos={videos} vertical pathname="/watch" />
           </section>
         </>
       ) : (
