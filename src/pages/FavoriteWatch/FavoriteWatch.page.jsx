@@ -76,7 +76,7 @@ const FavoriteWatch = () => {
             )}
           </section>
           <section className="list-section">
-            <GridVideo videos={favorites} pathname="/favorite/watch" vertical />
+            <GridVideo videos={favorites} pathname="/favorites/watch" vertical />
           </section>
         </>
       ) : (

@@ -24,7 +24,6 @@ const SearchIconWrapper = styled.div`
   justify-content: center;
   padding: 0 1rem;
   position: absolute;
-  z-index: 10;
 
   svg {
     width: 1rem;

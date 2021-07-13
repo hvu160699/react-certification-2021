@@ -88,7 +88,7 @@ Header.propTypes = {
 
 Header.defaultProps = {
   isAuthenticated: false,
-  user: undefined,
+  user: {},
 };
 
 export default Header;

@@ -6,6 +6,7 @@ import useForm from '../../utils/hooks/useForm';
 import Modal from '../../components/Common/Modal';
 import Input from '../../components/Common/Input';
 import Button from '../../components/Common/Button';
+import Form from '../../components/Common/Form';
 
 const LoginPage = (props) => {
   const {
@@ -14,14 +15,14 @@ const LoginPage = (props) => {
 
   const [form, onChangeForm] = useForm({
     userName: '',
-    password: '',
+    userPassword: '',
   });
 
   const onClose = () => props.history.goBack();
 
   const handleSubmit = async () => {
     try {
-      const res = await handleLogin(form.userName, form.password);
+      const res = await handleLogin(form.userName, form.userPassword);
 
       if (res) {
         props.history.replace('/');
@@ -40,26 +41,30 @@ const LoginPage = (props) => {
       footer={<Button.PrimaryButton onClick={handleSubmit}>Login</Button.PrimaryButton>}
     >
       <form autoComplete="off">
-        <div>
-          <label htmlFor="userName">User name</label>
-          <Input
-            type="text"
-            name="userName"
-            value={form.userName}
-            onChange={onChangeForm}
-            placeholder="Username/ID"
-          />
-        </div>
-        <div>
-          <label htmlFor="password">Password</label>
-          <Input
-            type="password"
-            name="password"
-            value={form.password}
-            onChange={onChangeForm}
-            placeholder="Password"
-          />
-        </div>
+        <Form.FormGroup>
+          <Form.FormRow>
+            <Form.FormLabel htmlFor="userName">User name</Form.FormLabel>
+            <Input
+              type="text"
+              name="userName"
+              value={form.userName}
+              onChange={onChangeForm}
+              placeholder="Username/ID"
+            />
+          </Form.FormRow>
+        </Form.FormGroup>
+        <Form.FormGroup>
+          <Form.FormRow>
+            <Form.FormLabel htmlFor="userPassword">Password</Form.FormLabel>
+            <Input
+              type="password"
+              name="userPassword"
+              value={form.userPassword}
+              onChange={onChangeForm}
+              placeholder="Password"
+            />
+          </Form.FormRow>
+        </Form.FormGroup>
       </form>
     </Modal>
   );

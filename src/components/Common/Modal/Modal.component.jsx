@@ -62,4 +62,12 @@ Modal.propTypes = {
   onClose: PropTypes.func.isRequired,
 };
 
+Modal.defaultProps = {
+  title: '',
+  hasFooter: false,
+  footer: null,
+  open: false,
+  onClose: () => {},
+};
+
 export default Modal;

@@ -1,5 +1,5 @@
 import React from 'react';
-
+import PropTypes from 'prop-types';
 import Styled from './Sidebar.styled';
 
 import { SIDEBAR_MENU } from '../../utils/constants';
@@ -36,5 +36,16 @@ const Sidebar = (props) => {
     </Styled.AsideContainer>
   );
 };
+
+Sidebar.propTypes = {
+  isSidebarOpen: PropTypes.bool.isRequired,
+  isAuthenticated: PropTypes.bool,
+  handleAuthentication: PropTypes.func
+}
+
+Sidebar.defaultProps = {
+  isAuthenticated: false,
+  handleAuthentication: () => {}
+}
 
 export default Sidebar;

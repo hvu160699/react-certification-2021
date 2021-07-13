@@ -4,7 +4,7 @@ import NavLink from '../Common/NavLink';
 
 const AsideContainer = styled.aside`
   min-width: ${(props) => (props.isSidebarOpen ? 'auto' : '14rem')};
-  z-index: 50;
+  z-index: 40;
   display: flex;
   flex-direction: column;
   justify-content: space-between;

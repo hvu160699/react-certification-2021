@@ -22,11 +22,12 @@ const ModalOverlay = styled.div`
 const ModalDialog = styled.div`
   width: 100%;
   background: white;
+  margin: 1rem;
+  border-radius: 0.25rem;
 
   @media (min-width: 768px) {
-    max-width: 36rem;
     margin: 0.25rem;
-    border-radius: 0.25rem;
+    max-width: 36rem;
   }
 `;
 

@@ -25,9 +25,6 @@ const reducer = (state, action) => {
 
       return { ...state, favorites: updatedVideos };
     }
-    case 'AUTH/SELECT_VIDEO': {
-      return { ...state, video: payload };
-    }
     default: {
       return { ...state };
     }
