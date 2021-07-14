@@ -19,7 +19,7 @@ const HomePage = () => {
       chart: 'mostPopular',
       part: ['snippet'],
       type: 'video',
-      maxResults: 1,
+      maxResults: 5,
     };
 
     fetchVideos(queryData);

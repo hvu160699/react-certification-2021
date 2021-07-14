@@ -40,7 +40,7 @@ const WatchPage = () => {
       part: ['snippet'],
       type: 'video',
       relatedToVideoId: videoId,
-      maxResults: 1,
+      maxResults: 5,
     };
 
     fetchVideoDetailWithRelated(querySingle, queryList);
