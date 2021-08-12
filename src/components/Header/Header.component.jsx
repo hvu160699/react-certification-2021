@@ -1,18 +1,41 @@
 import React, { useState } from 'react';
+import PropTypes from 'prop-types';
+
+import { useHistory, useLocation, Link } from 'react-router-dom';
 
 import SearchBar from '../SearchBar';
 import Avatar from '../Common/Avatar';
 import ToggleSwitch from '../ToggleSwitch';
 import Button from '../Common/Button';
-import { HeaderContainer, HeaderSection } from './Header.styled';
 
-const Header = () => {
-  const [isCheck, setCheck] = useState(false);
+import Styled from './Header.styled';
+
+const Header = ({
+  handleSearchVideos,
+  isAuthenticated,
+  user,
+  isDarkMode,
+  toggleTheme,
+  toggleSidebar,
+}) => {
+  const history = useHistory();
+  const location = useLocation();
+  const [keyword, setKeyword] = useState('');
+
+  const handleOnChange = (e) => setKeyword(e.target.value);
+
+  const handleKeyPress = (e) => {
+    if (e.key === 'Enter') {
+      handleSearchVideos(keyword);
+
+      return location.pathname.length > 1 && history.push('/');
+    }
+  };
 
   return (
-    <HeaderContainer>
-      <HeaderSection>
-        <Button>
+    <Styled.HeaderContainer isDarkMode={isDarkMode}>
+      <Styled.Section>
+        <Button.LightButton onClick={toggleSidebar}>
           <span className="sr-only">Open aside menu</span>
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -28,24 +51,44 @@ const Header = () => {
               d="M4 6h16M4 12h16M4 18h16"
             />
           </svg>
-        </Button>
-        <SearchBar />
-      </HeaderSection>
-      <HeaderSection>
-        <div style={{ marginRight: '1rem' }}>
-          <ToggleSwitch
-            toggleName="theme-toggle-switch"
-            checked={isCheck}
-            onChange={() => setCheck(!isCheck)}
-          />
-        </div>
-        <Avatar
-          src="https://images.unsplash.com/photo-1491528323818-fdd1faba62cc?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
-          alt="avatar"
+        </Button.LightButton>
+        <SearchBar value={keyword} onChange={handleOnChange} onKeyDown={handleKeyPress} />
+      </Styled.Section>
+      <Styled.RightSection>
+        <ToggleSwitch
+          toggleName="theme-toggle-switch"
+          checked={isDarkMode}
+          onChange={toggleTheme}
         />
-      </HeaderSection>
-    </HeaderContainer>
+        {isAuthenticated ? (
+          <Avatar src={user.avatarUrl} alt="avatar" />
+        ) : (
+          <Link
+            to={{
+              pathname: '/login',
+              state: { background: location },
+            }}
+          >
+            <Avatar alt="avatar" />
+          </Link>
+        )}
+      </Styled.RightSection>
+    </Styled.HeaderContainer>
   );
+};
+
+Header.propTypes = {
+  isDarkMode: PropTypes.bool.isRequired,
+  toggleTheme: PropTypes.func.isRequired,
+  toggleSidebar: PropTypes.func.isRequired,
+  handleSearchVideos: PropTypes.func.isRequired,
+  isAuthenticated: PropTypes.bool,
+  user: PropTypes.objectOf(PropTypes.any),
+};
+
+Header.defaultProps = {
+  isAuthenticated: false,
+  user: {},
 };
 
 export default Header;
